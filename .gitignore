@@ -1,0 +1,15 @@
+node_modules
+dist
+dist-ssr
+storybook-static
+.next
+*.local
+.vite
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.log
+coverage
+.tsbuildinfo
+*.tsbuildinfo
