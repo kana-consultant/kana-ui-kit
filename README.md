@@ -275,28 +275,39 @@ The library build emits:
 
 The package is scoped under `@kana-consultant`. A `prepublishOnly` hook runs
 typecheck + build before every publish, and `publishConfig.access` is set to
-`public` so the first publish works on the free tier.
+`public`.
 
-First-time setup:
+### Automated publish (recommended)
+
+`.github/workflows/publish.yml` publishes to npm automatically whenever a
+GitHub release is published. Every CI-published tarball carries a
+[signed provenance attestation](https://docs.npmjs.com/generating-provenance-statements)
+linking it back to the exact commit and workflow run.
+
+One-time repo setup:
+
+1. On npmjs.com, generate an **Automation** access token (bypasses 2FA).
+2. In the GitHub repo, add it as a secret named `NPM_TOKEN`
+   (`Settings → Secrets and variables → Actions → New repository secret`).
+
+Cutting a new version:
+
+```bash
+pnpm version patch          # or minor / major — bumps package.json and creates a tag
+git push --follow-tags
+gh release create v$(node -p "require('./package.json').version") \
+  --generate-notes
+```
+
+The workflow runs, validates the tag matches `package.json`, then publishes.
+
+### Manual publish
+
+If you prefer to publish locally:
 
 ```bash
 npm login
-```
-
-Make sure you (or a bot account) are a member of the `kana-consultant` org on
-npmjs.com, then:
-
-```bash
-pnpm publish
-# or: npm publish
-```
-
-Cutting subsequent versions:
-
-```bash
-pnpm version patch   # or minor / major
-pnpm publish
-git push --follow-tags
+pnpm publish --otp=<6-digit-code>
 ```
 
 ### What ships
