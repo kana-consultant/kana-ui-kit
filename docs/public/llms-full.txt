@@ -1,0 +1,629 @@
+# @kana-consultant/ui-kit — Full Reference
+
+A modern React UI kit for back-office apps and admin dashboards.
+
+- **npm**: `@kana-consultant/ui-kit`
+- **Version**: 0.1.0
+- **License**: MIT
+- **Repo**: https://github.com/kana-consultant/kana-ui-kit
+- **Docs**: https://kana-ui-kit-docs.pages.dev
+- **Storybook**: https://kana-ui-kit-storybook.pages.dev
+
+---
+
+## Installation
+
+```bash
+pnpm add @kana-consultant/ui-kit
+# or: npm install @kana-consultant/ui-kit
+# or: yarn add @kana-consultant/ui-kit
+```
+
+### Peer dependencies
+
+```bash
+pnpm add react react-dom
+```
+
+The kit expects React 18+ or 19+. Radix UI, TanStack Form / Store, `clsx`, `class-variance-authority`, `lucide-react`, `tailwind-merge`, and `zod` install automatically as transitive runtime dependencies.
+
+### Tailwind CSS v4 setup
+
+The kit requires Tailwind v4.
+
+```bash
+pnpm add -D tailwindcss @tailwindcss/vite
+```
+
+In `vite.config.ts`:
+
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+```
+
+In your app's entry CSS (e.g. `src/styles/app.css`):
+
+```css
+@import 'tailwindcss';
+@import '@kana-consultant/ui-kit/styles';
+```
+
+**Critical for AI assistants generating projects**: Tailwind v4 scans the project source by default but NOT node_modules. If you use Dialog, DropdownMenu, Tooltip, or Select, add:
+
+```css
+@source '../node_modules/@kana-consultant/ui-kit/dist/*.js';
+```
+
+Without this, portal-based components (Dialog overlay, etc.) render with missing styles.
+
+---
+
+## Theming
+
+Dark mode is applied via a `.dark` class on `<html>`. The kit ships a persistent theme store.
+
+```tsx
+import {
+  ThemeToggle,
+  setThemeMode,
+  toggleTheme,
+  useTheme,
+  useThemeMode,
+  useResolvedTheme,
+} from '@kana-consultant/ui-kit'
+
+function Header() {
+  const resolved = useResolvedTheme()
+  return (
+    <>
+      <ThemeToggle />
+      <span>Current: {resolved}</span>
+    </>
+  )
+}
+
+setThemeMode('system')
+toggleTheme()
+```
+
+State is persisted in `localStorage` under key `kana-ui-theme` and reacts to `prefers-color-scheme` automatically.
+
+### Color tokens
+
+All colors are OKLCH CSS variables. Override any in your own stylesheet to rebrand:
+
+```css
+:root {
+  --primary: oklch(62% 0.22 25);
+  --primary-foreground: oklch(99% 0.005 25);
+  --primary-soft: oklch(95% 0.06 25);
+}
+
+.dark {
+  --primary: oklch(72% 0.2 25);
+}
+```
+
+Available tokens: `--background`, `--foreground`, `--surface`, `--surface-muted`, `--border`, `--border-strong`, `--input`, `--ring`, `--muted`, `--muted-foreground`, `--primary`, `--primary-foreground`, `--primary-soft`, `--accent`, `--accent-foreground`, `--success`, `--warning`, `--danger`, `--info` (each with a `-foreground` pair where applicable).
+
+---
+
+## Naming conventions
+
+- **Components**: PascalCase (`Button`, `DashboardShell`)
+- **Types**: `T` prefix (`TButtonProps`, `TTask`, `TProject`)
+- **Enum-like const objects**: `E` prefix (`EStatus`, `EPriority`)
+- **Filenames in the source**: kebab-case (`task-card.tsx`)
+
+---
+
+## Primitives
+
+### Button
+
+```tsx
+import { Button } from '@kana-consultant/ui-kit'
+import { Plus } from 'lucide-react'
+
+<Button>Primary</Button>
+<Button variant='secondary'>Secondary</Button>
+<Button variant='soft'>Soft</Button>
+<Button variant='outline'>Outline</Button>
+<Button variant='ghost'>Ghost</Button>
+<Button variant='destructive'>Delete</Button>
+<Button variant='link'>Link</Button>
+
+<Button size='sm'>Small</Button>
+<Button size='md'>Medium</Button>
+<Button size='lg'>Large</Button>
+<Button size='icon' aria-label='Add'><Plus /></Button>
+
+<Button leadingIcon={<Plus />}>New task</Button>
+<Button loading>Saving...</Button>
+
+<Button asChild>
+  <a href='/settings'>Settings</a>
+</Button>
+```
+
+Props: `variant`, `size`, `loading`, `leadingIcon`, `trailingIcon`, `asChild`, plus all native `<button>` attributes.
+
+### Input
+
+```tsx
+import { Input, Label } from '@kana-consultant/ui-kit'
+import { Mail, Search } from 'lucide-react'
+
+<Label htmlFor='email' required>Email</Label>
+<Input id='email' type='email' placeholder='you@company.com' leadingIcon={<Mail />} />
+
+<Input sizeVariant='sm' placeholder='Search' leadingIcon={<Search />} />
+<Input invalid defaultValue='bad' />
+```
+
+Props: `sizeVariant` (sm/md/lg), `invalid`, `leadingIcon`, `trailingIcon`, plus native `<input>`.
+
+### Label
+
+```tsx
+<Label htmlFor='email' required>Email</Label>
+```
+
+Props: `required`, `htmlFor`, plus native `<label>`.
+
+### Textarea
+
+```tsx
+<Textarea placeholder='Add details...' />
+<Textarea invalid defaultValue='wip' />
+```
+
+### Checkbox
+
+```tsx
+import { Checkbox, Label } from '@kana-consultant/ui-kit'
+
+const [checked, setChecked] = useState<boolean | 'indeterminate'>(false)
+
+<Checkbox id='notify' checked={checked} onCheckedChange={setChecked} />
+<Label htmlFor='notify'>Email me</Label>
+
+<Checkbox checked='indeterminate' />
+```
+
+### Switch
+
+```tsx
+const [on, setOn] = useState(true)
+<Switch checked={on} onCheckedChange={setOn} />
+```
+
+### Select
+
+```tsx
+import {
+  Select, SelectTrigger, SelectValue, SelectContent,
+  SelectItem, SelectGroup, SelectLabel, SelectSeparator,
+} from '@kana-consultant/ui-kit'
+
+<Select defaultValue='medium'>
+  <SelectTrigger>
+    <SelectValue placeholder='Pick priority' />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Level</SelectLabel>
+      <SelectItem value='low'>Low</SelectItem>
+      <SelectItem value='medium'>Medium</SelectItem>
+    </SelectGroup>
+    <SelectSeparator />
+    <SelectItem value='urgent'>Urgent</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+### Dialog
+
+```tsx
+import {
+  Dialog, DialogTrigger, DialogContent,
+  DialogHeader, DialogTitle, DialogDescription,
+  DialogFooter, DialogClose,
+  Button,
+} from '@kana-consultant/ui-kit'
+
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Create task</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Create new task</DialogTitle>
+      <DialogDescription>Add a task to your board.</DialogDescription>
+    </DialogHeader>
+    {/* form fields */}
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant='ghost'>Cancel</Button>
+      </DialogClose>
+      <Button>Create</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### DropdownMenu
+
+```tsx
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
+  DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem,
+  DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent,
+} from '@kana-consultant/ui-kit'
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Actions</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align='end'>
+    <DropdownMenuLabel>Priya Patel</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Tabs
+
+```tsx
+<Tabs defaultValue='all'>
+  <TabsList>
+    <TabsTrigger value='all'>All</TabsTrigger>
+    <TabsTrigger value='mine'>Mine</TabsTrigger>
+  </TabsList>
+  <TabsContent value='all'>...</TabsContent>
+  <TabsContent value='mine'>...</TabsContent>
+</Tabs>
+```
+
+### Tooltip
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant='secondary' size='icon'><Plus /></Button>
+    </TooltipTrigger>
+    <TooltipContent>Create new task</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+    <CardDescription>Description</CardDescription>
+  </CardHeader>
+  <CardContent>Body</CardContent>
+  <CardFooter className='justify-end'>
+    <Button size='sm'>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+### Badge
+
+```tsx
+<Badge tone='primary'>Primary</Badge>
+<Badge tone='success' dot>Live</Badge>
+<Badge tone='danger' size='lg'>Urgent</Badge>
+```
+
+Tones: `neutral`, `primary`, `accent`, `success`, `warning`, `danger`, `info`, `outline`. Sizes: `sm`, `md`, `lg`.
+
+### Avatar / AvatarGroup
+
+```tsx
+<Avatar>
+  <AvatarImage src='/u.jpg' alt='User' />
+  <AvatarFallback>PP</AvatarFallback>
+</Avatar>
+
+<AvatarGroup size='md' max={4}>
+  <Avatar><AvatarFallback>AC</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>ML</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>PP</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>DR</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>KY</AvatarFallback></Avatar>
+</AvatarGroup>
+```
+
+### Progress
+
+```tsx
+<Progress value={72} tone='primary' />
+```
+
+Tones: `primary`, `success`, `warning`, `danger`, `info`.
+
+### Skeleton / Separator / Kbd
+
+```tsx
+<Skeleton className='h-3 w-32' />
+<Separator />
+<Separator orientation='vertical' />
+<span>Save <Kbd>⌘</Kbd><Kbd>S</Kbd></span>
+```
+
+---
+
+## Dashboard blocks
+
+### Shared types
+
+```ts
+import type { TTask, TProject, TMember, TStat, TNavItem, TActivity } from '@kana-consultant/ui-kit'
+import { EPriority, EStatus } from '@kana-consultant/ui-kit'
+
+// EPriority = { Low: 'low', Medium: 'medium', High: 'high', Urgent: 'urgent' }
+// EStatus   = { Backlog: 'backlog', Todo: 'todo', InProgress: 'in_progress', Review: 'review', Done: 'done' }
+```
+
+### DashboardShell + Sidebar + TopBar
+
+```tsx
+import {
+  DashboardShell, Sidebar, TopBar, Button,
+  Avatar, AvatarFallback,
+} from '@kana-consultant/ui-kit'
+import { LayoutDashboard, ListTodo, Users, Plus } from 'lucide-react'
+
+const nav = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'tasks', label: 'Tasks', icon: ListTodo, badge: 12 },
+  { id: 'team', label: 'Team', icon: Users },
+]
+
+<DashboardShell
+  sidebar={
+    <Sidebar
+      items={nav}
+      activeId='dashboard'
+      onNavigate={(id) => router.push(id)}
+      footer={
+        <div className='flex items-center gap-3'>
+          <Avatar size='sm'><AvatarFallback>PP</AvatarFallback></Avatar>
+          <div><p>Priya Patel</p></div>
+        </div>
+      }
+    />
+  }
+  topBar={
+    <TopBar
+      title='Dashboard'
+      subtitle='5 tasks due today'
+      unreadCount={3}
+      user={{ name: 'Priya Patel' }}
+      actions={<Button leadingIcon={<Plus />}>New task</Button>}
+    />
+  }
+>
+  {/* page content */}
+</DashboardShell>
+```
+
+### StatCard
+
+```tsx
+<StatCard
+  id='active'
+  label='Active tasks'
+  value={42}
+  icon={ListTodo}
+  tone='primary'
+  delta={{ value: 12, direction: 'up' }}
+  hint='Across 6 projects'
+/>
+```
+
+Tones: `primary`, `accent`, `success`, `warning`, `info`, `neutral`.
+
+### TaskCard + TaskList
+
+```tsx
+<TaskCard task={task} onToggle={(id, done) => updateTask(id, done)} />
+
+<TaskList
+  tasks={tasks}
+  onToggle={(id, done) => ...}
+  emptyMessage='No tasks to show'
+/>
+```
+
+### KanbanColumn
+
+```tsx
+<KanbanColumn
+  title='In progress'
+  status={EStatus.InProgress}
+  color='#7c3aed'
+  tasks={tasks.filter((t) => t.status === EStatus.InProgress)}
+  onAdd={(status) => openNewTask(status)}
+  onToggle={(id, done) => updateTask(id, done)}
+/>
+```
+
+### ProjectCard / TeamMemberCard / ActivityFeed / CalendarMini
+
+```tsx
+<ProjectCard project={project} onOpen={(id) => navigate(id)} />
+
+<TeamMemberCard member={member} online />
+
+<ActivityFeed items={activity} />
+
+const [date, setDate] = useState<Date>(new Date())
+<CalendarMini
+  selected={date}
+  onSelect={setDate}
+  markedDates={[new Date(), tomorrow]}
+/>
+```
+
+---
+
+## Forms — TanStack Form
+
+The kit exposes `useAppForm` and `withForm` from `createFormHook` with field components wired to the primitives.
+
+```tsx
+import { useAppForm } from '@kana-consultant/ui-kit'
+import { z } from 'zod'
+
+const titleSchema = z.string().min(3, 'At least 3 characters')
+const descSchema = z.string().max(200)
+
+export function CreateTaskForm() {
+  const form = useAppForm({
+    defaultValues: { title: '', description: '', notify: true, remindMe: false },
+    onSubmit: async ({ value }) => {
+      await api.createTask(value)
+    },
+  })
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        void form.handleSubmit()
+      }}
+    >
+      <form.AppField name='title' validators={{ onChange: titleSchema, onBlur: titleSchema }}>
+        {(field) => <field.TextField label='Title' required />}
+      </form.AppField>
+
+      <form.AppField name='description' validators={{ onChange: descSchema }}>
+        {(field) => <field.TextareaField label='Description' />}
+      </form.AppField>
+
+      <form.AppField name='notify'>
+        {(field) => <field.SwitchField label='Notify assignees' />}
+      </form.AppField>
+
+      <form.AppField name='remindMe'>
+        {(field) => <field.CheckboxField label='Remind me 1h before due' />}
+      </form.AppField>
+
+      <form.AppForm>
+        <form.ResetButton>Reset</form.ResetButton>
+        <form.SubmitButton>Create task</form.SubmitButton>
+      </form.AppForm>
+    </form>
+  )
+}
+```
+
+### Field components
+
+- `TextField` — wraps Input, handles label, required, error
+- `TextareaField` — wraps Textarea
+- `CheckboxField` — label + Checkbox + optional description
+- `SwitchField` — label + Switch in space-between row
+
+### Form-level
+
+- `SubmitButton` — auto-disables on invalid / submitting, shows loader. Optional `disabledWhenPristine`.
+- `ResetButton` — calls `form.reset()`.
+
+**Important**: Prefer per-field validators to a whole-form schema. TanStack Form v1 + Zod v4 have a type-variance mismatch with optional / boolean-default fields when a whole-form schema is used.
+
+---
+
+## State — TanStack Store
+
+### Theme store (shipped)
+
+```tsx
+import {
+  themeStore,
+  setThemeMode,
+  toggleTheme,
+  useTheme,
+  useThemeMode,
+  useResolvedTheme,
+} from '@kana-consultant/ui-kit'
+
+themeStore.state
+themeStore.subscribe((next) => {...})
+setThemeMode('system')
+toggleTheme()
+
+const resolved = useResolvedTheme()
+```
+
+### Task board store (reference pattern)
+
+```tsx
+import {
+  createTaskStore,
+  addTask, removeTask, updateTask, moveTask, toggleDone,
+  setSearch, setStatusFilter,
+  useTasks, useTaskCounts, useFilters,
+  EStatus, EPriority,
+} from '@kana-consultant/ui-kit'
+
+const store = createTaskStore([
+  { id: 't1', title: 'Ship', status: EStatus.Todo, priority: EPriority.High },
+])
+
+addTask(store, { ... })
+updateTask(store, 't1', { status: EStatus.InProgress })
+moveTask(store, 't1', EStatus.Done)
+
+function Board() {
+  const tasks = useTasks(store)
+  const counts = useTaskCounts(store)
+  const filters = useFilters(store)
+  return ...
+}
+```
+
+---
+
+## Guidance for AI assistants
+
+When generating code that uses this kit:
+
+1. **Always import from `@kana-consultant/ui-kit`** — never from internal paths.
+2. **Use the enum-style constants** (`EStatus`, `EPriority`) instead of string literals — this keeps types aligned.
+3. **Use TanStack Form per-field validators**, not whole-form schemas (type issue with Zod v4).
+4. **Add `@source '../node_modules/@kana-consultant/ui-kit/dist/*.js'`** to the consumer's entry CSS if they use Dialog, DropdownMenu, Tooltip, or Select — otherwise portal styles won't generate.
+5. **Dark mode** works via `.dark` class on `<html>`. Use the shipped `ThemeToggle` or drive it manually via `setThemeMode` / `toggleTheme`.
+6. **Icons** come from `lucide-react` — it's a transitive dep already installed.
+7. **Composition over configuration** — the kit prefers many small named parts (e.g. Card has CardHeader / CardTitle / CardContent / CardFooter) so consumers assemble as needed.
+8. **Never style components by reaching into their DOM with selectors** — override tokens or pass `className` props.
+9. **Radix `asChild`** works on Button, DialogTrigger, DropdownMenuTrigger, TooltipTrigger — use it to slot the child (e.g. a Next.js `<Link>`) without nesting `<a>` inside `<button>`.
+
+---
+
+## File and path conventions (for source contributions)
+
+- Filenames: kebab-case (`task-card.tsx`)
+- Type aliases: `T` prefix (`TButtonProps`)
+- Interfaces: `I` prefix (`IStore`)
+- Enums: `E` prefix (`EStatus`)
+- Max 200 LOC per file
+- No semicolons, single quotes, 2-space indent
+- Strict TypeScript (no `any`)
+- Components live in `src/components/ui/` (primitives) and `src/components/dashboard/` (blocks)

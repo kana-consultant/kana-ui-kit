@@ -1,0 +1,65 @@
+# @kana-consultant/ui-kit
+
+> A modern React UI kit for building back-office apps and admin dashboards. Ships 18 accessible Radix-backed primitives, 12 ready-made dashboard blocks, TanStack Form + TanStack Store integrations, Tailwind v4 OKLCH design tokens, and a full Storybook.
+
+The kit is distributed as an ESM npm package with TypeScript declarations and a rolled-up CSS token sheet. All components are React 18+/19 compatible.
+
+- Package name: `@kana-consultant/ui-kit`
+- Install: `pnpm add @kana-consultant/ui-kit`
+- Styles entry: `import '@kana-consultant/ui-kit/styles'`
+- Peer deps: `react`, `react-dom`
+- Requires: Tailwind CSS v4
+
+## Getting started
+
+- [Installation](https://kana-ui-kit-docs.pages.dev/docs/installation): Install the package and set up Tailwind v4
+- [Theming](https://kana-ui-kit-docs.pages.dev/docs/theming): Dark mode, OKLCH color tokens, theme store API
+
+## Primitives
+
+- [Overview](https://kana-ui-kit-docs.pages.dev/docs/components): Index of every primitive
+- [Avatar](https://kana-ui-kit-docs.pages.dev/docs/components/avatar): Image + fallback, 5 sizes, AvatarGroup with auto-overflow
+- [Badge](https://kana-ui-kit-docs.pages.dev/docs/components/badge): 8 tones, 3 sizes, optional leading dot
+- [Button](https://kana-ui-kit-docs.pages.dev/docs/components/button): 7 variants, 5 sizes, loading state, icon slots, asChild composition
+- [Card](https://kana-ui-kit-docs.pages.dev/docs/components/card): Header / Title / Description / Content / Footer parts
+- [Checkbox](https://kana-ui-kit-docs.pages.dev/docs/components/checkbox): Radix-backed with indeterminate state
+- [Dialog](https://kana-ui-kit-docs.pages.dev/docs/components/dialog): Modal with overlay, focus trap, header/footer helpers
+- [DropdownMenu](https://kana-ui-kit-docs.pages.dev/docs/components/dropdown-menu): Items, checkbox / radio variants, submenus
+- [Input](https://kana-ui-kit-docs.pages.dev/docs/components/input): Leading / trailing icon slots, invalid state, size variants
+- [Kbd](https://kana-ui-kit-docs.pages.dev/docs/components/kbd): Keyboard shortcut pill
+- [Label](https://kana-ui-kit-docs.pages.dev/docs/components/label): Form label with optional required indicator
+- [Progress](https://kana-ui-kit-docs.pages.dev/docs/components/progress): Progress bar in 5 tones
+- [Select](https://kana-ui-kit-docs.pages.dev/docs/components/select): Radix Select with groups, labels, separators
+- [Separator](https://kana-ui-kit-docs.pages.dev/docs/components/separator): Horizontal / vertical divider
+- [Skeleton](https://kana-ui-kit-docs.pages.dev/docs/components/skeleton): Animated loading placeholder
+- [Switch](https://kana-ui-kit-docs.pages.dev/docs/components/switch): Binary toggle for instant settings
+- [Tabs](https://kana-ui-kit-docs.pages.dev/docs/components/tabs): Horizontal tabs with content panels
+- [Textarea](https://kana-ui-kit-docs.pages.dev/docs/components/textarea): Multiline input with invalid state
+- [Tooltip](https://kana-ui-kit-docs.pages.dev/docs/components/tooltip): Hover / focus tooltip
+
+## Dashboard blocks
+
+- [Overview](https://kana-ui-kit-docs.pages.dev/docs/dashboard): Index of every dashboard block
+- [ActivityFeed](https://kana-ui-kit-docs.pages.dev/docs/dashboard/activity-feed): Timeline with avatar rail for audit logs / change history
+- [CalendarMini](https://kana-ui-kit-docs.pages.dev/docs/dashboard/calendar-mini): Month grid with markers and selection
+- [DashboardShell](https://kana-ui-kit-docs.pages.dev/docs/dashboard/dashboard-shell): Sidebar + TopBar layout wrapper
+- [KanbanColumn](https://kana-ui-kit-docs.pages.dev/docs/dashboard/kanban-column): Column header + stacked TaskCards for pipeline views
+- [ProjectCard](https://kana-ui-kit-docs.pages.dev/docs/dashboard/project-card): Color bar, progress, member group, task ratio — generic collection card
+- [Sidebar](https://kana-ui-kit-docs.pages.dev/docs/dashboard/sidebar): Grouped navigation with badges and active state
+- [StatCard](https://kana-ui-kit-docs.pages.dev/docs/dashboard/stat-card): KPI card with value, icon, tone, delta indicator
+- [TaskCard](https://kana-ui-kit-docs.pages.dev/docs/dashboard/task-card): Record card with checkbox, priority, assignees, subtasks
+- [TeamMemberCard](https://kana-ui-kit-docs.pages.dev/docs/dashboard/team-member-card): Person card with avatar, role, online indicator
+- [TopBar](https://kana-ui-kit-docs.pages.dev/docs/dashboard/top-bar): Page header with title, search, notifications, theme, avatar
+
+## Integrations
+
+- [Forms with TanStack Form](https://kana-ui-kit-docs.pages.dev/docs/forms): Typed form primitives + Zod validators per field
+- [State with TanStack Store](https://kana-ui-kit-docs.pages.dev/docs/stores): Theme + collection stores with typed selectors
+
+## Optional
+
+- [Full LLM dump](https://kana-ui-kit-docs.pages.dev/llms-full.txt): All docs concatenated, ingestion-ready
+- [Claude Code Skill](https://kana-ui-kit-docs.pages.dev/skill.md): Drop-in skill file for Claude Code users
+- [Storybook](https://kana-ui-kit-storybook.pages.dev): Interactive component explorer
+- [GitHub](https://github.com/kana-consultant/kana-ui-kit): Source, issues, releases
+- [npm](https://www.npmjs.com/package/@kana-consultant/ui-kit): Package page

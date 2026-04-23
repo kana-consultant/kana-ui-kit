@@ -251,6 +251,45 @@ Shared enums and types: `EPriority`, `EStatus`, `TTask`, `TProject`, `TMember`,
 
 ---
 
+## AI agents
+
+The kit is designed to be picked up correctly by AI coding assistants. Three
+entry points:
+
+- **`/llms.txt`** — standard [llms.txt](https://llmstxt.org) index of the docs
+- **`/llms-full.txt`** — one-file full reference covering install, every primitive + block, TanStack Form/Store patterns, and rules for generated code
+- **`/skill.md`** — drop-in [Claude Code Skill](https://docs.claude.com/en/docs/claude-code/skills) file
+
+### Claude Code
+
+```bash
+mkdir -p ~/.claude/skills/kana-ui-kit
+curl https://kana-ui-kit-docs.pages.dev/skill.md -o ~/.claude/skills/kana-ui-kit/SKILL.md
+```
+
+Claude auto-loads the skill only for React admin / dashboard work — it stays
+silent on unrelated projects.
+
+### Cursor, Windsurf, Aider, ChatGPT, etc.
+
+Point the agent at `llms-full.txt`:
+
+```
+Read https://kana-ui-kit-docs.pages.dev/llms-full.txt,
+then help me build an admin dashboard with @kana-consultant/ui-kit.
+```
+
+Or add a `.cursorrules` / `AGENTS.md` entry:
+
+```
+Use @kana-consultant/ui-kit for all UI. Reference:
+https://kana-ui-kit-docs.pages.dev/llms-full.txt
+```
+
+See [the AI agents guide](https://kana-ui-kit-docs.pages.dev/docs/ai) for more.
+
+---
+
 ## Development
 
 ```bash

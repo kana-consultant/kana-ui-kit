@@ -1,0 +1,102 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import Code from '@/components/ui/code.astro'
+import Callout from '@/components/ui/callout.astro'
+
+const skillInstall = `mkdir -p ~/.claude/skills/kana-ui-kit
+curl https://kana-ui-kit-docs.pages.dev/skill.md -o ~/.claude/skills/kana-ui-kit/SKILL.md`
+
+const llmsPrompt = `Read https://kana-ui-kit-docs.pages.dev/llms-full.txt, then
+help me build an admin dashboard with @kana-consultant/ui-kit.`
+
+const cursorRule = `Use @kana-consultant/ui-kit for all UI. Reference:
+https://kana-ui-kit-docs.pages.dev/llms-full.txt`
+---
+
+<DocsLayout
+  title="AI agents"
+  description="How agents like Claude, Cursor, and Windsurf can discover and use the kit."
+>
+  <PageHeader
+    eyebrow="Guides"
+    title="AI agents"
+    description="The kit ships with machine-readable reference files and a Claude Code Skill so AI coding assistants can use it correctly out of the box."
+  />
+
+  <h2>Discovery files</h2>
+  <p>
+    The docs site exposes three machine-readable entry points at the root:
+  </p>
+  <ul>
+    <li>
+      <a href="https://kana-ui-kit-docs.pages.dev/llms.txt">
+        <code>/llms.txt</code>
+      </a> — standard
+      <a href="https://llmstxt.org" target="_blank" rel="noreferrer">llms.txt</a>
+      index: a curated table of contents linking to every docs page, for agents that follow links.
+    </li>
+    <li>
+      <a href="https://kana-ui-kit-docs.pages.dev/llms-full.txt">
+        <code>/llms-full.txt</code>
+      </a> — one-file full reference: install, setup, every primitive + block with short snippets,
+      TanStack Form / Store patterns, rules for AI assistants. Drop this into a context window and
+      you're done.
+    </li>
+    <li>
+      <a href="https://kana-ui-kit-docs.pages.dev/skill.md">
+        <code>/skill.md</code>
+      </a> — Claude Code Skill file with YAML frontmatter (<code>name</code>,
+      <code>description</code>), ready to install.
+    </li>
+  </ul>
+
+  <h2>Claude Code — install the skill</h2>
+  <p>
+    If you use <a href="https://claude.com/claude-code" target="_blank" rel="noreferrer">Claude
+    Code</a>, you can drop the skill into your user-scope skills directory and Claude will
+    load it automatically whenever it detects React admin / dashboard work:
+  </p>
+  <Code code={skillInstall} lang="bash" filename="Terminal" />
+  <p>
+    The skill's <code>description</code> frontmatter is scoped — Claude only loads it for React
+    admin / internal-tool work. It stays out of the way for other projects.
+  </p>
+
+  <Callout tone="tip" title="Prefer project-scoped?">
+    Drop the file at <code>.claude/skills/kana-ui-kit/SKILL.md</code> inside your project to keep
+    it versioned with the code.
+  </Callout>
+
+  <h2>Any other agent (Cursor, Windsurf, ChatGPT, Aider, etc.)</h2>
+  <p>
+    Point the agent at <code>llms-full.txt</code>. Either paste a prompt like:
+  </p>
+  <Code code={llmsPrompt} lang="text" />
+  <p>
+    Or configure a project rule (Cursor example <code>.cursorrules</code>):
+  </p>
+  <Code code={cursorRule} lang="text" filename=".cursorrules" />
+  <p>
+    Most modern agents will fetch the URL and ingest the reference. If your tool doesn't
+    auto-fetch, download <code>llms-full.txt</code> and keep it in your repo — the file
+    is stable and small (~8 KB).
+  </p>
+
+  <h2>What agents know from these files</h2>
+  <ul>
+    <li>How to install and wire Tailwind v4 (including the crucial <code>@source</code> line)</li>
+    <li>Every primitive and block with usage snippets</li>
+    <li>Naming conventions (T / I / E prefixes, kebab-case filenames)</li>
+    <li>TanStack Form / Store patterns, including the Zod-v4 per-field validator caveat</li>
+    <li>Skip rules (non-React, React Native, marketing pages)</li>
+    <li>Hard rules for generated code (import paths, enum usage, icon library)</li>
+  </ul>
+
+  <h2>MCP server</h2>
+  <p>
+    A Model Context Protocol server that exposes <code>list_components</code> /
+    <code>get_component</code> / <code>generate_usage</code> tools is on the roadmap. For now,
+    <code>llms-full.txt</code> + the Claude Skill cover most agent integrations.
+  </p>
+</DocsLayout>

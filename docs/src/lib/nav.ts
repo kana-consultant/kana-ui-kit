@@ -15,6 +15,7 @@ export const docsNav: TNavSection[] = [
       { label: 'Introduction', href: '/' },
       { label: 'Installation', href: '/docs/installation' },
       { label: 'Theming', href: '/docs/theming' },
+      { label: 'AI agents', href: '/docs/ai' },
     ],
   },
   {
