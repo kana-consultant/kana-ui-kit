@@ -1,6 +1,7 @@
 ---
 import Container from '@/components/ui/container.astro'
 import GridPattern from '@/components/ui/grid-pattern.astro'
+import { kitVersion } from '@/lib/version'
 ---
 
 <section class="relative isolate overflow-hidden border-b border-border">
@@ -21,7 +22,7 @@ import GridPattern from '@/components/ui/grid-pattern.astro'
         <span class="absolute inline-flex size-full animate-ping rounded-full bg-success/70"></span>
         <span class="relative inline-flex size-1.5 rounded-full bg-success"></span>
       </span>
-      <span>v0.1.0 live on npm</span>
+      <span>v{kitVersion} live on npm</span>
       <span class="text-muted-foreground/60 transition group-hover:translate-x-0.5 group-hover:text-primary">→</span>
     </a>
 
