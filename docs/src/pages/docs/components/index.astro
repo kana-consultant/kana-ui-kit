@@ -1,0 +1,55 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+
+const primitives = [
+  { name: 'Button', desc: '7 variants, 5 sizes, loading + icon slots', href: '/docs/components/button' },
+  { name: 'Input', desc: 'Leading / trailing icons, invalid state, sizes', href: '/docs/components/input' },
+  { name: 'Badge', desc: '8 tones, optional dot, 3 sizes', href: '/docs/components/badge' },
+  { name: 'Label', desc: 'Required indicator, tied to inputs', href: '/docs/components' },
+  { name: 'Textarea', desc: 'Invalid state, resize-y by default', href: '/docs/components' },
+  { name: 'Checkbox', desc: 'Radix-backed, indeterminate supported', href: '/docs/components' },
+  { name: 'Switch', desc: 'Radix-backed toggle', href: '/docs/components' },
+  { name: 'Select', desc: 'Radix Select composition', href: '/docs/components' },
+  { name: 'Dialog', desc: 'Modal with overlay + header/footer helpers', href: '/docs/components' },
+  { name: 'DropdownMenu', desc: 'Items, checkbox items, radio items, submenus', href: '/docs/components' },
+  { name: 'Tabs', desc: 'Radix-backed tabs', href: '/docs/components' },
+  { name: 'Tooltip', desc: 'Provider + trigger + content', href: '/docs/components' },
+  { name: 'Card', desc: 'Header / Title / Description / Content / Footer', href: '/docs/components' },
+  { name: 'Avatar', desc: 'Image + fallback', href: '/docs/components' },
+  { name: 'AvatarGroup', desc: 'Auto-overflow stack', href: '/docs/components' },
+  { name: 'Progress', desc: '5 tones', href: '/docs/components' },
+  { name: 'Skeleton', desc: 'Animated placeholder', href: '/docs/components' },
+  { name: 'Separator', desc: 'Horizontal / vertical', href: '/docs/components' },
+  { name: 'Tooltip', desc: 'Provider + trigger + content', href: '/docs/components' },
+  { name: 'Kbd', desc: 'Keyboard shortcut pill', href: '/docs/components' },
+]
+---
+
+<DocsLayout
+  title="Components"
+  description="The primitive layer — 18 accessible, unstyled-first components you compose into anything."
+>
+  <PageHeader
+    eyebrow="Primitives"
+    title="Components"
+    description="The primitive layer — 18 accessible, Radix-powered components you compose into anything."
+  />
+
+  <div class="grid gap-3 sm:grid-cols-2">
+    {
+      primitives.map((p) => (
+        <a
+          href={p.href}
+          class="group rounded-xl border border-border bg-surface p-4 transition-all hover:border-border-strong hover:shadow-soft"
+        >
+          <div class="flex items-center justify-between">
+            <h3 class="font-mono text-sm font-semibold text-foreground">{p.name}</h3>
+            <span class="text-xs text-muted-foreground group-hover:text-primary">→</span>
+          </div>
+          <p class="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+        </a>
+      ))
+    }
+  </div>
+</DocsLayout>

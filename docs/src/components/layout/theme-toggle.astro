@@ -1,0 +1,39 @@
+<button
+  type="button"
+  id="theme-toggle"
+  aria-label="Toggle theme"
+  class="inline-flex size-9 items-center justify-center rounded-md border border-border bg-surface text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+>
+  <svg id="theme-sun" class="size-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+  </svg>
+  <svg id="theme-moon" class="size-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+</button>
+
+<script is:inline>
+  ;(() => {
+    const KEY = 'kana-docs-theme'
+    const root = document.documentElement
+    const stored = localStorage.getItem(KEY)
+    const initial = stored === 'dark' || stored === 'light'
+      ? stored
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    root.classList.toggle('dark', initial === 'dark')
+    root.style.colorScheme = initial
+
+    document.addEventListener('click', (e) => {
+      const target = e.target
+      if (!(target instanceof Element)) return
+      const btn = target.closest('#theme-toggle')
+      if (!btn) return
+      const next = root.classList.toggle('dark') ? 'dark' : 'light'
+      root.style.colorScheme = next
+      localStorage.setItem(KEY, next)
+    })
+  })()
+</script>

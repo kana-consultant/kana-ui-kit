@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+@import '@kana-consultant/ui-kit/styles';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    min-height: 100svh;
+  }
+  ::selection {
+    background-color: color-mix(in oklch, var(--primary) 30%, transparent);
+  }
+  pre {
+    color-scheme: light dark;
+  }
+  .astro-code,
+  .astro-code span {
+    font-family: var(--font-mono);
+  }
+}
+
+@utility prose-docs {
+  max-width: 72ch;
+  color: var(--foreground);
+
+  & h1 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  & h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    scroll-margin-top: 5rem;
+  }
+  & h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    scroll-margin-top: 5rem;
+  }
+  & p,
+  & ul,
+  & ol {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+  }
+  & ul,
+  & ol {
+    padding-left: 1.25rem;
+  }
+  & ul {
+    list-style: disc;
+  }
+  & ol {
+    list-style: decimal;
+  }
+  & li::marker {
+    color: var(--muted-foreground);
+  }
+  & a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  & a:hover {
+    text-decoration-thickness: 2px;
+  }
+  & code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    background: var(--muted);
+    color: var(--foreground);
+  }
+  & pre {
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.6;
+    margin: 1rem 0 1.5rem;
+  }
+  & pre code {
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+  }
+  & hr {
+    border-color: var(--border);
+    margin: 2rem 0;
+  }
+  & blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    color: var(--muted-foreground);
+    font-style: italic;
+    margin: 1rem 0;
+  }
+}

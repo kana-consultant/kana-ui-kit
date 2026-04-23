@@ -1,0 +1,19 @@
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  site: 'https://kana-consultant.github.io',
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark-dimmed',
+      },
+    },
+  },
+})

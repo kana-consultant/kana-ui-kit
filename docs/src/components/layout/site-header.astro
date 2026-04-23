@@ -1,0 +1,58 @@
+---
+import Container from '@/components/ui/container.astro'
+import ThemeToggle from './theme-toggle.astro'
+import { topNav } from '@/lib/nav'
+
+const pathname = Astro.url.pathname
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-border/80 bg-surface/80 backdrop-blur-md supports-[backdrop-filter]:bg-surface/60"
+>
+  <Container size="xl" class="flex h-16 items-center justify-between gap-6">
+    <a href="/" class="flex items-center gap-2.5 focus-visible:outline-none">
+      <span
+        class="inline-flex size-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-soft"
+      >
+        K
+      </span>
+      <div class="flex flex-col leading-none">
+        <span class="text-sm font-semibold tracking-tight">@kana-consultant/ui-kit</span>
+        <span class="text-[10px] text-muted-foreground">v0.1.0 · docs</span>
+      </div>
+    </a>
+    <nav class="hidden items-center gap-1 text-sm md:flex">
+      {
+        topNav.map((item) => {
+          const active = item.href.startsWith('/') && pathname.startsWith(item.href)
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'rounded-md px-3 py-1.5 font-medium transition-colors',
+                active
+                  ? 'bg-muted text-foreground'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+              ]}
+              target={item.href.startsWith('http') ? '_blank' : undefined}
+              rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+            >
+              {item.label}
+            </a>
+          )
+        })
+      }
+    </nav>
+    <div class="flex items-center gap-2">
+      <a
+        href="https://www.npmjs.com/package/@kana-consultant/ui-kit"
+        target="_blank"
+        rel="noreferrer"
+        class="hidden items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1 font-mono text-xs text-muted-foreground hover:text-foreground md:inline-flex"
+      >
+        pnpm add @kana-consultant/ui-kit
+      </a>
+      <ThemeToggle />
+    </div>
+  </Container>
+</header>

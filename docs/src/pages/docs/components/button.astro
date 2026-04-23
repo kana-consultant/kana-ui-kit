@@ -1,0 +1,78 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import PropTable from '@/components/ui/prop-table.astro'
+import type { TPropRow } from '@/components/ui/prop-table.astro'
+import {
+  ButtonVariantsDemo,
+  ButtonSizesDemo,
+  ButtonIconsDemo,
+  ButtonLoadingDemo,
+} from '@/components/demos/button-demo'
+
+const variantsCode = `<Button variant='primary'>Primary</Button>
+<Button variant='secondary'>Secondary</Button>
+<Button variant='soft'>Soft</Button>
+<Button variant='outline'>Outline</Button>
+<Button variant='ghost'>Ghost</Button>
+<Button variant='destructive'>Destructive</Button>
+<Button variant='link'>Link</Button>`
+
+const iconsCode = `import { Plus, Sparkles, Trash2 } from 'lucide-react'
+
+<Button leadingIcon={<Plus />}>New task</Button>
+<Button variant='secondary' trailingIcon={<Sparkles />}>AI actions</Button>
+<Button variant='destructive' leadingIcon={<Trash2 />}>Delete</Button>`
+
+const loadingCode = `<Button loading>Saving...</Button>`
+
+const rows: TPropRow[] = [
+  { name: 'variant', type: "'primary' | 'secondary' | 'soft' | 'outline' | 'ghost' | 'destructive' | 'link'", default: "'primary'", description: 'Visual style.' },
+  { name: 'size', type: "'sm' | 'md' | 'lg' | 'icon' | 'icon-sm'", default: "'md'", description: 'Control height + horizontal padding.' },
+  { name: 'loading', type: 'boolean', default: 'false', description: 'Shows a spinner and disables interaction.' },
+  { name: 'leadingIcon', type: 'ReactNode', description: 'Icon slot rendered before children.' },
+  { name: 'trailingIcon', type: 'ReactNode', description: 'Icon slot rendered after children.' },
+  { name: 'asChild', type: 'boolean', default: 'false', description: 'Merge props into the child via Radix Slot — useful for links.' },
+]
+---
+
+<DocsLayout title="Button" description="Primary action control with variants, sizes, loading state, and icon slots.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Button"
+    description="Primary action control with 7 variants, 5 sizes, loading state, and icon slots."
+  />
+
+  <h2>Variants</h2>
+  <DemoFrame title="All variants">
+    <ButtonVariantsDemo client:visible />
+  </DemoFrame>
+  <Code code={variantsCode} lang="tsx" />
+
+  <h2>Sizes</h2>
+  <DemoFrame title="sm · md · lg · icon">
+    <ButtonSizesDemo client:visible />
+  </DemoFrame>
+
+  <h2>With icons</h2>
+  <DemoFrame title="Leading & trailing icons">
+    <ButtonIconsDemo client:visible />
+  </DemoFrame>
+  <Code code={iconsCode} lang="tsx" />
+
+  <h2>Loading state</h2>
+  <DemoFrame title="loading={true}">
+    <ButtonLoadingDemo client:visible />
+  </DemoFrame>
+  <Code code={loadingCode} lang="tsx" />
+
+  <h2>Props</h2>
+  <PropTable rows={rows} />
+
+  <p>
+    All other standard <code>&lt;button&gt;</code> attributes (<code>onClick</code>,
+    <code>disabled</code>, <code>type</code>, etc.) forward through.
+  </p>
+</DocsLayout>

@@ -1,0 +1,102 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import Code from '@/components/ui/code.astro'
+
+const themeCode = `import { themeStore, setThemeMode, toggleTheme, useResolvedTheme } from '@kana-consultant/ui-kit'
+
+themeStore.state
+themeStore.subscribe((next) => console.log(next))
+
+setThemeMode('system')
+toggleTheme()
+
+function Status() {
+  return <span>{useResolvedTheme()}</span>
+}`
+
+const taskStoreCode = `import {
+  createTaskStore,
+  addTask,
+  removeTask,
+  updateTask,
+  toggleDone,
+  setSearch,
+  setStatusFilter,
+  useTasks,
+  useTaskCounts,
+  useFilters,
+  EStatus,
+  EPriority,
+} from '@kana-consultant/ui-kit'
+
+const store = createTaskStore([
+  {
+    id: 't1',
+    title: 'Ship the thing',
+    status: EStatus.InProgress,
+    priority: EPriority.High,
+  },
+])
+
+addTask(store, {
+  id: 't2',
+  title: 'Write the changelog',
+  status: EStatus.Todo,
+  priority: EPriority.Medium,
+})
+
+setSearch(store, 'changelog')
+setStatusFilter(store, EStatus.Todo)
+
+function Board() {
+  const tasks = useTasks(store)
+  const counts = useTaskCounts(store)
+  const filters = useFilters(store)
+  return <span>{tasks.length} match · {counts[EStatus.Done]} done</span>
+}`
+---
+
+<DocsLayout
+  title="State (TanStack Store)"
+  description="Small, typed stores with selectors for theme and collection state."
+>
+  <PageHeader
+    eyebrow="Integrations"
+    title="State"
+    description="Tiny, typed stores built on TanStack Store. Ship a persistent theme store out of the box and a task-board store as a worked example."
+  />
+
+  <h2>Theme store</h2>
+  <p>
+    The <code>themeStore</code> keeps <code>{'{ mode, resolved }'}</code> in sync with
+    <code>localStorage</code> and <code>prefers-color-scheme</code>. It's applied to the DOM
+    automatically when the module loads, so you don't need a provider.
+  </p>
+  <Code code={themeCode} lang="tsx" />
+
+  <h2>Task board store (example)</h2>
+  <p>
+    A reference implementation of a collection store with CRUD, filter state, and derived
+    selectors. Copy the shape or use it directly for task-style data.
+  </p>
+  <Code code={taskStoreCode} lang="tsx" filename="stores/board.ts" />
+
+  <h3>Mutations</h3>
+  <ul>
+    <li><code>addTask(store, task)</code> — prepend to the list</li>
+    <li><code>removeTask(store, id)</code> — remove by id</li>
+    <li><code>updateTask(store, id, patch)</code> — shallow merge into matching task</li>
+    <li><code>moveTask(store, id, status)</code> — change column</li>
+    <li><code>toggleDone(store, id, done)</code> — Done ↔ Todo shortcut</li>
+    <li><code>setSearch(store, query)</code> — filter by title / description / tag</li>
+    <li><code>setStatusFilter(store, status | 'all')</code> — filter by status</li>
+  </ul>
+
+  <h3>Selectors (React)</h3>
+  <ul>
+    <li><code>useTasks(store)</code> — filtered list, re-renders only when it changes</li>
+    <li><code>useTaskCounts(store)</code> — map of status → count</li>
+    <li><code>useFilters(store)</code> — active filters</li>
+  </ul>
+</DocsLayout>

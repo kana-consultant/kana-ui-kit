@@ -1,0 +1,32 @@
+---
+import Container from '@/components/ui/container.astro'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="mt-16 border-t border-border bg-surface-muted">
+  <Container size="xl" class="flex flex-col items-start justify-between gap-4 py-8 text-sm text-muted-foreground md:flex-row md:items-center">
+    <p>
+      &copy; {year} Kana Consultant. Released under the MIT license.
+    </p>
+    <nav class="flex items-center gap-4">
+      <a
+        href="https://github.com/kana-consultant/kana-ui-kit"
+        target="_blank"
+        rel="noreferrer"
+        class="hover:text-foreground"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://www.npmjs.com/package/@kana-consultant/ui-kit"
+        target="_blank"
+        rel="noreferrer"
+        class="hover:text-foreground"
+      >
+        npm
+      </a>
+      <a href="/docs/installation" class="hover:text-foreground">Docs</a>
+    </nav>
+  </Container>
+</footer>

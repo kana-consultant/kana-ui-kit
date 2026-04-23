@@ -1,0 +1,92 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import Code from '@/components/ui/code.astro'
+import Callout from '@/components/ui/callout.astro'
+
+const storeUsage = `import { ThemeToggle, setThemeMode, useResolvedTheme } from '@kana-consultant/ui-kit'
+
+function Header() {
+  const mode = useResolvedTheme()
+  return (
+    <div>
+      <ThemeToggle />
+      <span>Current: {mode}</span>
+    </div>
+  )
+}
+
+setThemeMode('system')`
+
+const overrideTokens = `@import 'tailwindcss';
+@import '@kana-consultant/ui-kit/styles';
+
+:root {
+  --primary: oklch(62% 0.22 25);
+  --primary-foreground: oklch(99% 0.005 25);
+  --primary-soft: oklch(95% 0.06 25);
+}
+
+.dark {
+  --primary: oklch(72% 0.2 25);
+}`
+
+const tokenList = `--background        --foreground
+--surface           --surface-muted
+--border            --border-strong
+--input             --ring
+--muted             --muted-foreground
+--primary           --primary-foreground   --primary-soft
+--accent            --accent-foreground
+--success           --warning              --danger   --info`
+---
+
+<DocsLayout title="Theming" description="Dark mode, color tokens, and how to brand the kit.">
+  <PageHeader
+    eyebrow="Getting started"
+    title="Theming"
+    description="Dark mode is built in. Every color is an OKLCH CSS variable you can override."
+  />
+
+  <h2>Dark mode</h2>
+  <p>
+    The kit toggles dark mode via a <code>.dark</code> class on <code>&lt;html&gt;</code>. The
+    shipped theme store reads / writes <code>localStorage</code> and syncs with
+    <code>prefers-color-scheme</code> automatically.
+  </p>
+  <Code code={storeUsage} lang="tsx" filename="components/header.tsx" />
+
+  <h3>API</h3>
+  <ul>
+    <li><code>useTheme()</code> — full state (<code>{'{ mode, resolved }'}</code>)</li>
+    <li><code>useThemeMode()</code> — current user preference (<code>light | dark | system</code>)</li>
+    <li><code>useResolvedTheme()</code> — what's actually applied (<code>light | dark</code>)</li>
+    <li><code>setThemeMode(mode)</code> — imperative setter</li>
+    <li><code>toggleTheme()</code> — flips between light and dark</li>
+  </ul>
+
+  <h2>Color tokens</h2>
+  <p>
+    Each semantic color is a CSS variable on <code>:root</code> (light) and <code>.dark</code>
+    (dark). Override any of them in your own stylesheet to rebrand the kit:
+  </p>
+  <Code code={overrideTokens} lang="css" filename="src/styles/app.css" />
+
+  <h3>Available tokens</h3>
+  <Code code={tokenList} lang="css" />
+
+  <Callout tone="tip" title="OKLCH colors">
+    Using OKLCH means hue changes read predictably across the palette. To swap the brand color, you
+    only need to change the <code>--primary</code> triple — dependent tokens
+    (<code>--primary-soft</code>, <code>--primary-foreground</code>) can stay put or be re-derived
+    using <code>color-mix()</code>.
+  </Callout>
+
+  <h2>Radii, shadows, fonts</h2>
+  <p>
+    Equivalent tokens exist for layout and typography. See the full list in
+    <a href="https://github.com/kana-consultant/kana-ui-kit/blob/develop/src/styles/theme.css">
+      <code>src/styles/theme.css</code>
+    </a> on GitHub.
+  </p>
+</DocsLayout>

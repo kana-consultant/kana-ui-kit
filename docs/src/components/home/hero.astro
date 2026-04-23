@@ -1,0 +1,52 @@
+---
+import Container from '@/components/ui/container.astro'
+---
+
+<section class="relative overflow-hidden border-b border-border">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(80%_60%_at_50%_0%,color-mix(in_oklch,var(--primary)_20%,transparent),transparent_70%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <Container size="xl" class="relative flex flex-col items-center py-20 text-center sm:py-28">
+    <span
+      class="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground"
+    >
+      <span class="inline-block size-1.5 rounded-full bg-success"></span>
+      v0.1.0 now on npm
+    </span>
+    <h1
+      class="max-w-3xl text-balance text-5xl font-bold tracking-tight text-foreground sm:text-6xl"
+    >
+      The UI kit for shipping
+      <span class="bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+        back-office faster
+      </span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-balance text-lg text-muted-foreground">
+      Accessible primitives, dashboard blocks, TanStack Form + TanStack Store integrations,
+      Tailwind v4 design tokens, and Storybook out of the box.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/docs/installation"
+        class="inline-flex h-11 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground shadow-soft transition hover:brightness-110"
+      >
+        Get started
+      </a>
+      <a
+        href="/docs/components"
+        class="inline-flex h-11 items-center justify-center rounded-md border border-border bg-surface px-5 text-sm font-medium text-foreground shadow-soft transition hover:bg-muted"
+      >
+        Browse components
+      </a>
+    </div>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
+      <code class="rounded-md border border-border bg-surface px-3 py-1.5 font-mono">
+        pnpm add @kana-consultant/ui-kit
+      </code>
+      <span>•</span>
+      <span>18 primitives · 12 blocks · MIT</span>
+    </div>
+  </Container>
+</section>

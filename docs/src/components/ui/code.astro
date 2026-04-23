@@ -1,0 +1,29 @@
+---
+import { Code } from 'astro:components'
+
+type TProps = {
+  lang?: string
+  code: string
+  filename?: string
+}
+
+const { lang = 'ts', code, filename } = Astro.props as TProps
+---
+
+<figure class="my-4 overflow-hidden rounded-xl border border-border bg-surface-muted">
+  {
+    filename && (
+      <figcaption class="flex items-center gap-2 border-b border-border px-4 py-2 text-xs text-muted-foreground">
+        <span class="inline-block size-1.5 rounded-full bg-muted-foreground/40" />
+        {filename}
+      </figcaption>
+    )
+  }
+  <div class="overflow-x-auto p-4 text-[13px] leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0">
+    <Code
+      code={code}
+      lang={lang as never}
+      themes={{ light: 'github-light', dark: 'github-dark-dimmed' }}
+    />
+  </div>
+</figure>

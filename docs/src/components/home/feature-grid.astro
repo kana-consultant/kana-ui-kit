@@ -1,0 +1,53 @@
+---
+import Container from '@/components/ui/container.astro'
+
+const features = [
+  {
+    title: 'Accessible primitives',
+    body: 'Built on Radix UI — keyboard navigation, focus management, and ARIA semantics come for free across 18 components.',
+  },
+  {
+    title: 'Dashboard blocks',
+    body: 'Sidebar, TopBar, StatCard, KanbanColumn, CalendarMini, ActivityFeed, and more — ready to compose into any admin surface.',
+  },
+  {
+    title: 'TanStack Form + Zod',
+    body: 'First-class form primitives via createFormHook. Per-field Zod validation. Loading + dirty states handled for you.',
+  },
+  {
+    title: 'TanStack Store',
+    body: 'Ships a theme store and task-board store as working examples of client state with typed selectors.',
+  },
+  {
+    title: 'Tailwind v4 tokens',
+    body: 'OKLCH colors, design tokens exposed as CSS variables. Dark mode via .dark class. Drop-in theme system.',
+  },
+  {
+    title: 'Storybook 10',
+    body: 'Every primitive, block, and the full Tasko-style dashboard live in Storybook with a11y + theme addons.',
+  },
+]
+---
+
+<section class="py-20">
+  <Container size="xl">
+    <div class="mb-10 max-w-2xl">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+        What's inside
+      </p>
+      <h2 class="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+        Everything you need for the operator-facing side of your product.
+      </h2>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f) => (
+          <article class="group relative rounded-xl border border-border bg-surface p-5 transition-all hover:border-border-strong hover:shadow-soft">
+            <h3 class="text-base font-semibold tracking-tight">{f.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</section>

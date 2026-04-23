@@ -1,0 +1,51 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import PropTable from '@/components/ui/prop-table.astro'
+import type { TPropRow } from '@/components/ui/prop-table.astro'
+import { InputBasicDemo, InputSearchDemo, InputInvalidDemo } from '@/components/demos/input-demo'
+
+const basicCode = `<Label htmlFor="email" required>Email</Label>
+<Input id="email" type="email" placeholder="you@company.com" leadingIcon={<Mail />} />`
+
+const invalidCode = `<Input invalid defaultValue="not-an-email" />`
+
+const rows: TPropRow[] = [
+  { name: 'sizeVariant', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Control height + font size.' },
+  { name: 'invalid', type: 'boolean', default: 'false', description: 'Renders in error state with danger ring.' },
+  { name: 'leadingIcon', type: 'ReactNode', description: 'Icon slot inside the input, left side.' },
+  { name: 'trailingIcon', type: 'ReactNode', description: 'Icon slot inside the input, right side.' },
+]
+---
+
+<DocsLayout title="Input" description="Text input with leading / trailing icon slots and invalid state.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Input"
+    description="Text input with leading / trailing icon slots, size variants, and invalid state."
+  />
+
+  <h2>Basic</h2>
+  <DemoFrame title="With label + leading icon">
+    <InputBasicDemo client:visible />
+  </DemoFrame>
+  <Code code={basicCode} lang="tsx" />
+
+  <h2>Search</h2>
+  <DemoFrame title="Leading icon only">
+    <InputSearchDemo client:visible />
+  </DemoFrame>
+
+  <h2>Invalid</h2>
+  <DemoFrame title="invalid prop + external error message">
+    <InputInvalidDemo client:visible />
+  </DemoFrame>
+  <Code code={invalidCode} lang="tsx" />
+
+  <h2>Props</h2>
+  <PropTable rows={rows} />
+
+  <p>All other standard <code>&lt;input&gt;</code> attributes forward through.</p>
+</DocsLayout>

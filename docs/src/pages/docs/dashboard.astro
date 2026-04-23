@@ -1,0 +1,91 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import Code from '@/components/ui/code.astro'
+import Callout from '@/components/ui/callout.astro'
+
+const shellCode = `import { DashboardShell, Sidebar, TopBar } from '@kana-consultant/ui-kit'
+import { LayoutDashboard, ListTodo, Users } from 'lucide-react'
+
+const nav = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'tasks', label: 'Tasks', icon: ListTodo, badge: 12 },
+  { id: 'team', label: 'Team', icon: Users },
+]
+
+export function AdminApp() {
+  return (
+    <DashboardShell
+      sidebar={<Sidebar items={nav} activeId='dashboard' />}
+      topBar={<TopBar title='Dashboard' user={{ name: 'Priya Patel' }} />}
+    >
+      {/* your page content */}
+    </DashboardShell>
+  )
+}`
+
+const blocks = [
+  { name: 'DashboardShell', desc: 'Sidebar + TopBar layout wrapper.' },
+  { name: 'Sidebar', desc: 'Grouped nav items, badges, active state, footer slot.' },
+  { name: 'TopBar', desc: 'Title/subtitle, search, notifications, theme toggle, user avatar.' },
+  { name: 'ThemeToggle', desc: 'Wired to the theme store out of the box.' },
+  { name: 'StatCard', desc: 'Label, value, icon, delta indicator. For KPI rows.' },
+  { name: 'TaskCard', desc: 'Record card with checkbox, priority, assignees, subtasks, comments.' },
+  { name: 'TaskList', desc: 'Stack of TaskCards with empty-state fallback.' },
+  { name: 'ProjectCard', desc: 'Color bar, progress, member group — generic "collection" card.' },
+  { name: 'TeamMemberCard', desc: 'User/entity card with online badge.' },
+  { name: 'ActivityFeed', desc: 'Timeline with avatar rail — audit logs, change history.' },
+  { name: 'CalendarMini', desc: 'Month grid with markers and selection.' },
+  { name: 'KanbanColumn', desc: 'Column header + stacked cards for pipeline / workflow views.' },
+]
+---
+
+<DocsLayout
+  title="Dashboard blocks"
+  description="Higher-level compositions that slot into any admin surface."
+>
+  <PageHeader
+    eyebrow="Dashboard"
+    title="Dashboard blocks"
+    description="Higher-level compositions that slot into any admin surface. Ship the chrome of your back-office in minutes."
+  />
+
+  <h2>The shell</h2>
+  <p>
+    <code>DashboardShell</code> is the outermost container. It takes a <code>sidebar</code> and a
+    <code>topBar</code> as slots and renders your page content in the main area.
+  </p>
+  <Code code={shellCode} lang="tsx" filename="app/admin.tsx" />
+
+  <Callout tone="tip" title="Live demo">
+    The full Tasko-style dashboard composition is available in Storybook under
+    <code>Dashboard → Tasko Composition</code>. Clone the repo and run <code>pnpm storybook</code>
+    to poke at every prop.
+  </Callout>
+
+  <h2>Block reference</h2>
+  <div class="not-prose my-4 grid gap-3 sm:grid-cols-2">
+    {
+      blocks.map((b) => (
+        <div class="rounded-xl border border-border bg-surface p-4">
+          <h3 class="font-mono text-sm font-semibold">{b.name}</h3>
+          <p class="mt-1 text-sm text-muted-foreground">{b.desc}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Shared types and enums</h2>
+  <p>
+    Blocks share a small set of types and const-enums:
+  </p>
+  <ul>
+    <li><code>EPriority</code> — <code>Low | Medium | High | Urgent</code></li>
+    <li><code>EStatus</code> — <code>Backlog | Todo | InProgress | Review | Done</code></li>
+    <li><code>TTask</code>, <code>TProject</code>, <code>TMember</code>, <code>TStat</code>, <code>TNavItem</code>, <code>TActivity</code></li>
+  </ul>
+  <p>
+    They're shaped for a task-management domain but are generic enough to cover most CRUD /
+    collection-style surfaces — relabel and go.
+  </p>
+</DocsLayout>

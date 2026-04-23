@@ -1,0 +1,23 @@
+---
+import BaseLayout from './base-layout.astro'
+import Container from '@/components/ui/container.astro'
+import DocsSidebar from '@/components/layout/docs-sidebar.astro'
+
+type TProps = {
+  title: string
+  description?: string
+}
+
+const { title, description } = Astro.props as TProps
+---
+
+<BaseLayout title={`${title} · @kana-consultant/ui-kit`} description={description}>
+  <Container size="xl" class="flex gap-10 pt-0">
+    <div class="hidden lg:block">
+      <DocsSidebar />
+    </div>
+    <article class="min-w-0 flex-1 py-10 prose-docs">
+      <slot />
+    </article>
+  </Container>
+</BaseLayout>

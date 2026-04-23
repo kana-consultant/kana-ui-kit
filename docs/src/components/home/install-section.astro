@@ -1,0 +1,40 @@
+---
+import Container from '@/components/ui/container.astro'
+import Code from '@/components/ui/code.astro'
+
+const installCode = `pnpm add @kana-consultant/ui-kit
+
+# peer deps if not already installed
+pnpm add react react-dom
+pnpm add -D tailwindcss @tailwindcss/vite`
+
+const usageCode = `import { Button, DashboardShell } from '@kana-consultant/ui-kit'
+import '@kana-consultant/ui-kit/styles'
+
+export function App() {
+  return <Button>Ship it</Button>
+}`
+---
+
+<section class="border-y border-border bg-surface-muted py-20">
+  <Container size="xl">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          Installation
+        </p>
+        <h2 class="mb-4 text-balance text-3xl font-bold tracking-tight">
+          One install, zero-config defaults.
+        </h2>
+        <p class="max-w-md text-muted-foreground">
+          Radix, TanStack, and the rest install as peers automatically. Bring your own Tailwind v4
+          setup and import the shipped design tokens.
+        </p>
+      </div>
+      <div>
+        <Code code={installCode} lang="bash" filename="Terminal" />
+        <Code code={usageCode} lang="tsx" filename="app.tsx" />
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,46 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import PropTable from '@/components/ui/prop-table.astro'
+import type { TPropRow } from '@/components/ui/prop-table.astro'
+import { BadgeTonesDemo, BadgeDotDemo } from '@/components/demos/badge-demo'
+
+const tonesCode = `<Badge tone='primary'>Primary</Badge>
+<Badge tone='success'>Success</Badge>
+<Badge tone='warning'>Warning</Badge>
+<Badge tone='danger'>Danger</Badge>`
+
+const dotCode = `<Badge tone='success' dot>Live</Badge>
+<Badge tone='warning' dot>Draft</Badge>`
+
+const rows: TPropRow[] = [
+  { name: 'tone', type: "'neutral' | 'primary' | 'accent' | 'success' | 'warning' | 'danger' | 'info' | 'outline'", default: "'neutral'", description: 'Semantic color.' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height + font size.' },
+  { name: 'dot', type: 'boolean', default: 'false', description: 'Shows a small leading dot.' },
+]
+---
+
+<DocsLayout title="Badge" description="Compact label for status, metadata, or counts.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Badge"
+    description="Compact label for status, metadata, or counts. 8 tones, 3 sizes, optional dot."
+  />
+
+  <h2>Tones</h2>
+  <DemoFrame title="All 8 tones">
+    <BadgeTonesDemo client:visible />
+  </DemoFrame>
+  <Code code={tonesCode} lang="tsx" />
+
+  <h2>With dot</h2>
+  <DemoFrame title="Status-style dots">
+    <BadgeDotDemo client:visible />
+  </DemoFrame>
+  <Code code={dotCode} lang="tsx" />
+
+  <h2>Props</h2>
+  <PropTable rows={rows} />
+</DocsLayout>
