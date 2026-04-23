@@ -1,0 +1,160 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import Callout from '@/components/ui/callout.astro'
+import { DataTableDemo } from '@/components/demos/data-table-demo'
+
+const exampleCode = `import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  DataTableColumnHeader, DataTablePagination, DataTableToolbar,
+  Checkbox, Badge,
+} from '@kana-consultant/ui-kit'
+import {
+  useReactTable, getCoreRowModel, getSortedRowModel,
+  getFilteredRowModel, getPaginationRowModel, flexRender,
+  type ColumnDef,
+} from '@tanstack/react-table'
+
+type TUser = { id: string; name: string; email: string; role: string }
+
+const columns: ColumnDef<TUser>[] = [
+  {
+    accessorKey: 'name',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
+    cell: ({ row }) => <span className='font-medium'>{row.getValue('name')}</span>,
+  },
+  { accessorKey: 'email', header: 'Email' },
+  { accessorKey: 'role', header: 'Role' },
+]
+
+export function UsersTable({ data }: { data: TUser[] }) {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  })
+
+  return (
+    <div className='flex flex-col gap-3'>
+      <DataTableToolbar table={table} searchColumn='name' />
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((group) => (
+            <TableRow key={group.id}>
+              {group.headers.map((h) => (
+                <TableHead key={h.id}>
+                  {flexRender(h.column.columnDef.header, h.getContext())}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <TableRow key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <DataTablePagination table={table} />
+    </div>
+  )
+}`
+
+const installCode = `pnpm add @kana-consultant/ui-kit @tanstack/react-table`
+---
+
+<DocsLayout
+  title="DataTable"
+  description="Full-featured data grid built on TanStack Table with sorting, filtering, pagination, column visibility, and row selection."
+>
+  <PageHeader
+    eyebrow="Primitives"
+    title="DataTable"
+    description="Composable data-grid primitives wrapping @tanstack/react-table. Sorting, filtering, pagination, column visibility, and row selection — all themed with kit tokens."
+  />
+
+  <h2>Live example</h2>
+  <DemoFrame title="Full-featured table" padded={false}>
+    <div class="w-full p-6">
+      <DataTableDemo client:visible />
+    </div>
+  </DemoFrame>
+
+  <Callout tone="tip" title="Composable, not all-in-one">
+    The kit exports the table parts separately (<code>Table</code>, <code>TableHeader</code>,
+    <code>DataTableToolbar</code>, <code>DataTablePagination</code>, …) so you keep full control
+    over the row model, state, and column definitions from TanStack Table. No hidden magic.
+  </Callout>
+
+  <h2>Install</h2>
+  <Code code={installCode} lang="bash" />
+
+  <h2>Usage</h2>
+  <Code code={exampleCode} lang="tsx" filename="components/users-table.tsx" />
+
+  <h2>Building blocks</h2>
+  <h3>Table primitives</h3>
+  <ul>
+    <li><code>Table</code> — scroll container + themed <code>&lt;table&gt;</code></li>
+    <li><code>TableHeader</code>, <code>TableBody</code>, <code>TableFooter</code>, <code>TableRow</code></li>
+    <li><code>TableHead</code> — <code>&lt;th&gt;</code> with uppercase tracking</li>
+    <li><code>TableCell</code> — <code>&lt;td&gt;</code> with proper padding</li>
+    <li><code>TableCaption</code></li>
+  </ul>
+
+  <h3>DataTable helpers</h3>
+  <ul>
+    <li>
+      <code>DataTableColumnHeader</code> — sortable header. Props: <code>column</code>,
+      <code>title</code>. Shows a dropdown with ascending / descending / hide options and an icon
+      that reflects the active sort.
+    </li>
+    <li>
+      <code>DataTablePagination</code> — full pagination bar. Props: <code>table</code>,
+      <code>pageSizes?</code>, <code>showSelectedCount?</code>.
+    </li>
+    <li>
+      <code>DataTableViewOptions</code> — dropdown toggling column visibility. Props:
+      <code>table</code>.
+    </li>
+    <li>
+      <code>DataTableToolbar</code> — search input bound to a column + reset filters + actions
+      slot + filters slot + view options. Props: <code>table</code>, <code>searchColumn?</code>,
+      <code>searchPlaceholder?</code>, <code>actions?</code>, <code>filters?</code>,
+      <code>viewOptions?</code>.
+    </li>
+  </ul>
+
+  <h2>Row selection</h2>
+  <p>
+    Add a leading column with a <code>Checkbox</code> in both the header (select-all) and cell
+    (select-row). See the live demo source for the pattern. Selected rows get
+    <code>data-state="selected"</code> which the <code>TableRow</code> class styles with a subtle
+    <code>bg-primary-soft</code>.
+  </p>
+
+  <h2>Column visibility</h2>
+  <p>
+    Columns are hidable by default. Mark <code>enableHiding: false</code> on the column
+    definition for columns that should always stay visible (e.g. select / actions columns).
+  </p>
+
+  <Callout tone="info" title="Server-side data?">
+    All the models used above (<code>getCoreRowModel</code>, <code>getSortedRowModel</code>, …)
+    run client-side. If you paginate / sort / filter on the server, drop those helpers and pass
+    <code>manualPagination</code>, <code>manualSorting</code>, <code>manualFiltering</code> with
+    <code>pageCount</code> / total counts to the table instance. See the
+    <a href='https://tanstack.com/table/v8/docs/guide/pagination#manual-server-side-pagination' target='_blank' rel='noreferrer'>TanStack Table docs</a>.
+  </Callout>
+</DocsLayout>

@@ -23,6 +23,7 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 - [Button](https://kana-ui-kit-docs.pages.dev/docs/components/button): 7 variants, 5 sizes, loading state, icon slots, asChild composition
 - [Card](https://kana-ui-kit-docs.pages.dev/docs/components/card): Header / Title / Description / Content / Footer parts
 - [Checkbox](https://kana-ui-kit-docs.pages.dev/docs/components/checkbox): Radix-backed with indeterminate state
+- [DataTable](https://kana-ui-kit-docs.pages.dev/docs/components/data-table): Data grid on TanStack Table — sorting, filtering, pagination, column visibility, row selection
 - [Dialog](https://kana-ui-kit-docs.pages.dev/docs/components/dialog): Modal with overlay, focus trap, header/footer helpers
 - [DropdownMenu](https://kana-ui-kit-docs.pages.dev/docs/components/dropdown-menu): Items, checkbox / radio variants, submenus
 - [Input](https://kana-ui-kit-docs.pages.dev/docs/components/input): Leading / trailing icon slots, invalid state, size variants

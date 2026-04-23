@@ -27,6 +27,7 @@ export const docsNav: TNavSection[] = [
       { label: 'Button', href: '/docs/components/button' },
       { label: 'Card', href: '/docs/components/card' },
       { label: 'Checkbox', href: '/docs/components/checkbox' },
+      { label: 'DataTable', href: '/docs/components/data-table' },
       { label: 'Dialog', href: '/docs/components/dialog' },
       { label: 'DropdownMenu', href: '/docs/components/dropdown-menu' },
       { label: 'Input', href: '/docs/components/input' },

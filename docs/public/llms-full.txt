@@ -357,6 +357,96 @@ Tones: `neutral`, `primary`, `accent`, `success`, `warning`, `danger`, `info`, `
 
 Tones: `primary`, `success`, `warning`, `danger`, `info`.
 
+### DataTable (TanStack Table integration)
+
+The kit ships composable data-grid parts wrapping `@tanstack/react-table`. You own the table instance.
+
+```tsx
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  DataTableColumnHeader, DataTablePagination, DataTableToolbar,
+  Checkbox, Badge,
+} from '@kana-consultant/ui-kit'
+import {
+  useReactTable, getCoreRowModel, getSortedRowModel,
+  getFilteredRowModel, getPaginationRowModel, flexRender,
+  type ColumnDef,
+} from '@tanstack/react-table'
+
+type TUser = { id: string; name: string; role: string }
+
+const columns: ColumnDef<TUser>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'name',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
+    cell: ({ row }) => <span className='font-medium'>{row.getValue('name')}</span>,
+  },
+  { accessorKey: 'role', header: 'Role' },
+]
+
+const table = useReactTable({
+  data, columns,
+  getCoreRowModel: getCoreRowModel(),
+  getSortedRowModel: getSortedRowModel(),
+  getFilteredRowModel: getFilteredRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
+})
+
+return (
+  <div className='flex flex-col gap-3'>
+    <DataTableToolbar table={table} searchColumn='name' />
+    <Table>
+      <TableHeader>
+        {table.getHeaderGroups().map((group) => (
+          <TableRow key={group.id}>
+            {group.headers.map((h) => (
+              <TableHead key={h.id}>
+                {flexRender(h.column.columnDef.header, h.getContext())}
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows.map((row) => (
+          <TableRow key={row.id} data-state={row.getIsSelected() ? 'selected' : undefined}>
+            {row.getVisibleCells().map((cell) => (
+              <TableCell key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+    <DataTablePagination table={table} />
+  </div>
+)
+```
+
+**Exports**:
+- Raw: `Table`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableHead`, `TableCell`, `TableCaption`
+- Helpers: `DataTableColumnHeader`, `DataTablePagination`, `DataTableViewOptions`, `DataTableToolbar`
+
+**Rules**:
+- Use `data-state="selected"` on rows you want highlighted (kit styles it with `bg-primary-soft`).
+- Mark `enableHiding: false` on `select` and `actions` columns so they can't be toggled off.
+- Server-side: pass `manualSorting`, `manualFiltering`, `manualPagination` + `pageCount` to `useReactTable` and drop the client-side row-model getters.
+
 ### Skeleton / Separator / Kbd
 
 ```tsx

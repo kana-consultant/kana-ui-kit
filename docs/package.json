@@ -14,8 +14,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^5.0.4",
-    "@kana-consultant/ui-kit": "^0.1.0",
+    "@kana-consultant/ui-kit": "^0.2.0",
     "@tailwindcss/vite": "^4.2.0",
+    "@tanstack/react-table": "8.21.3",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.1",
     "astro": "^6.1.9",

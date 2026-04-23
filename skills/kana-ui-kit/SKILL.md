@@ -104,6 +104,56 @@ Field components: `TextField`, `TextareaField`, `CheckboxField`, `SwitchField`. 
 
 **Do not pass a whole-form Zod schema to `validators.onChange`** — TanStack Form v1 + Zod v4 have a type-variance mismatch with optional / boolean-default fields. Use per-field validators.
 
+### DataTable (TanStack Table)
+
+Use for any tabular admin list (users, audit logs, CRUD resources).
+
+```tsx
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  DataTableColumnHeader, DataTablePagination, DataTableToolbar,
+  Checkbox,
+} from '@kana-consultant/ui-kit'
+import {
+  useReactTable, getCoreRowModel, getSortedRowModel,
+  getFilteredRowModel, getPaginationRowModel, flexRender,
+  type ColumnDef,
+} from '@tanstack/react-table'
+
+const columns: ColumnDef<TUser>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => <Checkbox checked={table.getIsAllPageRowsSelected()} onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)} />,
+    cell: ({ row }) => <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} />,
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'name',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
+  },
+]
+
+const table = useReactTable({
+  data, columns,
+  getCoreRowModel: getCoreRowModel(),
+  getSortedRowModel: getSortedRowModel(),
+  getFilteredRowModel: getFilteredRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
+})
+
+<DataTableToolbar table={table} searchColumn='name' actions={<Button size='sm'>Invite</Button>} />
+<Table>...</Table>
+<DataTablePagination table={table} />
+```
+
+Exports: `Table`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableHead`, `TableCell`, `TableCaption`, `DataTableColumnHeader`, `DataTablePagination`, `DataTableViewOptions`, `DataTableToolbar`.
+
+Rules:
+- Add `enableHiding: false` on `select` / `actions` columns.
+- Use `data-state='selected'` on `TableRow` for row highlight when selected.
+- For server-side data, pass `manualSorting/Filtering/Pagination` + `pageCount` and drop client row-model getters.
+
 ### Dashboard layout
 
 ```tsx
