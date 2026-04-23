@@ -1,4 +1,4 @@
-# kana-ui-kit
+# @kana-consultant/ui-kit
 
 A modern React UI kit for **back-office apps and admin dashboards**. Headless
 Radix primitives, Tailwind CSS v4 design tokens, TanStack Form and TanStack
@@ -20,16 +20,16 @@ the layout chrome every time.
 ## Installation
 
 ```bash
-pnpm add kana-ui-kit
+pnpm add @kana-consultant/ui-kit
 # or
-npm install kana-ui-kit
+npm install @kana-consultant/ui-kit
 # or
-yarn add kana-ui-kit
+yarn add @kana-consultant/ui-kit
 ```
 
 ### Peer dependencies
 
-`kana-ui-kit` expects React 18+ or 19+ in your app:
+`@kana-consultant/ui-kit` expects React 18+ or 19+ in your app:
 
 ```bash
 pnpm add react react-dom
@@ -53,10 +53,10 @@ Then import the stylesheets in your app's entry CSS:
 ```css
 /* src/app.css */
 @import 'tailwindcss';
-@import 'kana-ui-kit/styles';
+@import '@kana-consultant/ui-kit/styles';
 ```
 
-`kana-ui-kit/styles` pulls in the design tokens, the `@theme inline` block
+`@kana-consultant/ui-kit/styles` pulls in the design tokens, the `@theme inline` block
 that wires them into Tailwind's utility system, and the `.dark` overrides.
 Your existing Tailwind configuration continues to work.
 
@@ -65,7 +65,7 @@ Your existing Tailwind configuration continues to work.
 ## Quick start
 
 ```tsx
-import { Button, Card, CardContent, CardHeader, CardTitle, StatCard } from 'kana-ui-kit'
+import { Button, Card, CardContent, CardHeader, CardTitle, StatCard } from '@kana-consultant/ui-kit'
 import { ListTodo } from 'lucide-react'
 
 export function Home() {
@@ -98,7 +98,7 @@ The kit toggles dark mode via a `.dark` class on `<html>`. The shipped theme
 store wires this up for you:
 
 ```tsx
-import { ThemeToggle, setThemeMode, useResolvedTheme } from 'kana-ui-kit'
+import { ThemeToggle, setThemeMode, useResolvedTheme } from '@kana-consultant/ui-kit'
 
 function Header() {
   const mode = useResolvedTheme()
@@ -121,7 +121,7 @@ State is persisted to `localStorage` under `kana-ui-theme` and reacts to
 ## Forms with TanStack Form
 
 ```tsx
-import { useAppForm } from 'kana-ui-kit'
+import { useAppForm } from '@kana-consultant/ui-kit'
 import { z } from 'zod'
 
 const titleSchema = z.string().min(3, 'At least 3 characters')
@@ -180,7 +180,7 @@ import {
   useTaskCounts,
   EPriority,
   EStatus,
-} from 'kana-ui-kit'
+} from '@kana-consultant/ui-kit'
 
 const store = createTaskStore([
   {
@@ -211,7 +211,7 @@ function Board() {
 
 ## Component index
 
-**Primitives** (`kana-ui-kit`)
+**Primitives** (`@kana-consultant/ui-kit`)
 
 | Component | Notes |
 | --- | --- |
@@ -273,25 +273,18 @@ The library build emits:
 
 ## Publishing to npm
 
-The project is pre-configured to publish. A `prepublishOnly` hook runs
-typecheck + build before every publish.
+The package is scoped under `@kana-consultant`. A `prepublishOnly` hook runs
+typecheck + build before every publish, and `publishConfig.access` is set to
+`public` so the first publish works on the free tier.
 
 First-time setup:
 
 ```bash
 npm login
-# verify the name is free (or pick a scoped name)
-npm view kana-ui-kit
 ```
 
-If the name is taken, scope it. Update `package.json`:
-
-```json
-{ "name": "@your-scope/ui-kit" }
-```
-
-Scoped packages need `--access public` to be free — already set in
-`publishConfig` so you can just run:
+Make sure you (or a bot account) are a member of the `kana-consultant` org on
+npmjs.com, then:
 
 ```bash
 pnpm publish
@@ -331,8 +324,8 @@ installed package.
 So consumers can:
 
 ```ts
-import { Button } from 'kana-ui-kit'
-import 'kana-ui-kit/styles'
+import { Button } from '@kana-consultant/ui-kit'
+import '@kana-consultant/ui-kit/styles'
 ```
 
 ---

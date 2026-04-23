@@ -1,5 +1,5 @@
 {
-  "name": "kana-ui-kit",
+  "name": "@kana-consultant/ui-kit",
   "version": "0.1.0",
   "type": "module",
   "description": "A modern React UI kit for building back-office apps and admin dashboards — accessible primitives, dashboard blocks, TanStack Form + TanStack Store integrations, Tailwind v4 design tokens, Storybook included.",
