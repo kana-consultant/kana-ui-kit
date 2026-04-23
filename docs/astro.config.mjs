@@ -12,7 +12,7 @@ export default defineConfig({
     shikiConfig: {
       themes: {
         light: 'github-light',
-        dark: 'github-dark-dimmed',
+        dark: 'github-dark',
       },
     },
   },

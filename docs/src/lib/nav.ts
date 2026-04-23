@@ -44,6 +44,6 @@ export const docsNav: TNavSection[] = [
 export const topNav: TNavItem[] = [
   { label: 'Docs', href: '/docs/installation' },
   { label: 'Components', href: '/docs/components' },
-  { label: 'Storybook', href: 'https://github.com/kana-consultant/kana-ui-kit' },
+  { label: 'Storybook', href: 'https://kana-ui-kit-storybook.pages.dev' },
   { label: 'GitHub', href: 'https://github.com/kana-consultant/kana-ui-kit' },
 ]

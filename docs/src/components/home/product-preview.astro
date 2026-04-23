@@ -1,0 +1,31 @@
+---
+import Container from '@/components/ui/container.astro'
+import { PreviewCard } from './preview-card'
+---
+
+<section class="relative isolate -mt-16 pb-16 sm:-mt-24 sm:pb-24">
+  <Container size="xl" class="relative">
+    <div class="relative mx-auto max-w-5xl">
+      <div
+        class="pointer-events-none absolute -inset-8 rounded-[32px] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklch,var(--primary)_15%,transparent)_0%,transparent_60%)] blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-overlay ring-1 ring-border/30"
+      >
+        <div class="flex items-center gap-2 border-b border-border bg-surface-muted px-4 py-2.5">
+          <span class="flex items-center gap-1.5">
+            <span class="size-2.5 rounded-full bg-danger/70"></span>
+            <span class="size-2.5 rounded-full bg-warning/70"></span>
+            <span class="size-2.5 rounded-full bg-success/70"></span>
+          </span>
+          <span class="ml-3 flex-1 text-center text-[11px] font-medium text-muted-foreground">
+            your-admin.app / dashboard
+          </span>
+        </div>
+        <PreviewCard client:visible />
+      </div>
+    </div>
+  </Container>
+</section>

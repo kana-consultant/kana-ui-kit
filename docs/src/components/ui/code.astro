@@ -10,20 +10,20 @@ type TProps = {
 const { lang = 'ts', code, filename } = Astro.props as TProps
 ---
 
-<figure class="my-4 overflow-hidden rounded-xl border border-border bg-surface-muted">
+<figure class="my-4 overflow-hidden rounded-xl border border-border bg-[#fff] dark:bg-[#0d1117]">
   {
     filename && (
-      <figcaption class="flex items-center gap-2 border-b border-border px-4 py-2 text-xs text-muted-foreground">
+      <figcaption class="flex items-center gap-2 border-b border-border bg-surface-muted px-4 py-2 text-xs text-muted-foreground">
         <span class="inline-block size-1.5 rounded-full bg-muted-foreground/40" />
         {filename}
       </figcaption>
     )
   }
-  <div class="overflow-x-auto p-4 text-[13px] leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0">
+  <div class="overflow-x-auto p-4 text-[13px] leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0">
     <Code
       code={code}
       lang={lang as never}
-      themes={{ light: 'github-light', dark: 'github-dark-dimmed' }}
+      themes={{ light: 'github-light', dark: 'github-dark' }}
     />
   </div>
 </figure>

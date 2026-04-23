@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro'
 import Hero from '@/components/home/hero.astro'
-import FeatureGrid from '@/components/home/feature-grid.astro'
-import InstallSection from '@/components/home/install-section.astro'
+import StackRow from '@/components/home/stack-row.astro'
+import ProductPreview from '@/components/home/product-preview.astro'
+import BentoGrid from '@/components/home/bento-grid.astro'
+import CtaSection from '@/components/home/cta-section.astro'
 ---
 
 <BaseLayout>
   <Hero />
-  <FeatureGrid />
-  <InstallSection />
+  <ProductPreview />
+  <StackRow />
+  <BentoGrid />
+  <CtaSection />
 </BaseLayout>

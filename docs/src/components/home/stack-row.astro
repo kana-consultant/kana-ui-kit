@@ -1,0 +1,32 @@
+---
+import Container from '@/components/ui/container.astro'
+
+const stack = [
+  { name: 'React 19' },
+  { name: 'Radix UI' },
+  { name: 'TanStack Form' },
+  { name: 'TanStack Store' },
+  { name: 'Tailwind CSS v4' },
+  { name: 'Storybook 10' },
+  { name: 'Vite 7' },
+  { name: 'TypeScript' },
+]
+---
+
+<section class="border-b border-border bg-surface-muted/40">
+  <Container size="xl" class="py-10">
+    <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+      Built on the best of modern React
+    </p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-medium text-muted-foreground">
+      {
+        stack.map((s) => (
+          <span class="inline-flex items-center gap-2 opacity-80 transition hover:opacity-100">
+            <span class="inline-block size-1.5 rounded-full bg-primary/40" />
+            {s.name}
+          </span>
+        ))
+      }
+    </div>
+  </Container>
+</section>

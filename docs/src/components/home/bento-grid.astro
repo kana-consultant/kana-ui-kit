@@ -1,0 +1,108 @@
+---
+import Container from '@/components/ui/container.astro'
+import { PrimitivesDemo, FormFieldsDemo, DashboardDemo } from './bento-demos'
+---
+
+<section class="relative py-24">
+  <Container size="xl">
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+        What's inside
+      </p>
+      <h2 class="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
+        Everything you need for the operator-facing side of your product.
+      </h2>
+      <p class="mt-4 text-balance text-muted-foreground">
+        30 components, 2 TanStack integrations, one cohesive design system. All yours to compose.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
+      <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-border-strong md:col-span-2">
+        <div class="flex flex-col gap-6 md:flex-row md:items-start">
+          <div class="md:flex-1">
+            <p class="text-xs font-semibold uppercase tracking-wider text-primary">Primitives</p>
+            <h3 class="mt-2 text-2xl font-semibold tracking-tight">18 Radix-backed components</h3>
+            <p class="mt-2 text-sm text-muted-foreground">
+              Button, Input, Select, Dialog, DropdownMenu, Tabs, Tooltip and more — accessible
+              keyboard handling, ARIA semantics, focus management baked in.
+            </p>
+          </div>
+          <div class="md:max-w-[280px]">
+            <PrimitivesDemo client:visible />
+          </div>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-border-strong">
+        <p class="text-xs font-semibold uppercase tracking-wider text-primary">TanStack Form</p>
+        <h3 class="mt-2 text-xl font-semibold tracking-tight">Typed forms, Zod validation</h3>
+        <p class="mt-2 text-sm text-muted-foreground">
+          createFormHook + field components. Per-field validators. Loading + dirty states handled.
+        </p>
+        <div class="mt-5">
+          <FormFieldsDemo client:visible />
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-border-strong">
+        <p class="text-xs font-semibold uppercase tracking-wider text-primary">Dark mode</p>
+        <h3 class="mt-2 text-xl font-semibold tracking-tight">System-aware theme store</h3>
+        <p class="mt-2 text-sm text-muted-foreground">
+          OKLCH tokens, persistent <code class="font-mono text-xs">useStore</code>-backed state,
+          <code class="font-mono text-xs">prefers-color-scheme</code> sync out of the box.
+        </p>
+        <div class="mt-6 flex items-center gap-3 rounded-lg border border-border bg-surface-muted p-3">
+          <div class="flex-1">
+            <div class="h-2 w-full rounded-full bg-gradient-to-r from-[oklch(99%_0.005_270)] via-[oklch(55%_0.22_290)] to-[oklch(16%_0.015_270)]"></div>
+          </div>
+          <span class="font-mono text-[10px] text-muted-foreground">OKLCH</span>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-border-strong md:col-span-2">
+        <div class="flex flex-col gap-6 md:flex-row md:items-start">
+          <div class="md:flex-1">
+            <p class="text-xs font-semibold uppercase tracking-wider text-primary">
+              Dashboard blocks
+            </p>
+            <h3 class="mt-2 text-2xl font-semibold tracking-tight">
+              12 ready-made compositions
+            </h3>
+            <p class="mt-2 text-sm text-muted-foreground">
+              DashboardShell, Sidebar, TopBar, StatCard, TaskCard, KanbanColumn, CalendarMini,
+              ActivityFeed — the chrome of your back-office, already built.
+            </p>
+          </div>
+          <div class="md:w-[320px]">
+            <DashboardDemo client:visible />
+          </div>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-border-strong md:col-span-3">
+        <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <div class="md:max-w-xl">
+            <p class="text-xs font-semibold uppercase tracking-wider text-primary">Storybook</p>
+            <h3 class="mt-2 text-2xl font-semibold tracking-tight">
+              Every component, every state — live.
+            </h3>
+            <p class="mt-2 text-sm text-muted-foreground">
+              30+ stories including a full Tasko-style dashboard composition. a11y + theme addons
+              enabled. Deployed alongside these docs.
+            </p>
+          </div>
+          <a
+            href="https://kana-ui-kit-storybook.pages.dev"
+            target="_blank"
+            rel="noreferrer"
+            class="group/btn inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border bg-surface-muted px-5 text-sm font-semibold text-foreground shadow-soft transition hover:bg-muted"
+          >
+            Launch Storybook
+            <span class="transition group-hover/btn:translate-x-0.5">↗</span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </Container>
+</section>

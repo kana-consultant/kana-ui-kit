@@ -1,0 +1,21 @@
+---
+type TProps = {
+  class?: string
+}
+const { class: className = '' } = Astro.props as TProps
+---
+
+<div class={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+  <svg class="absolute inset-0 h-full w-full opacity-[0.12] dark:opacity-[0.15]" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid-pattern" width="56" height="56" patternUnits="userSpaceOnUse">
+        <path d="M 56 0 L 0 0 0 56" fill="none" stroke="currentColor" stroke-width="1" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid-pattern)" class="text-muted-foreground" />
+  </svg>
+  <div
+    class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]"
+  >
+  </div>
+</div>
