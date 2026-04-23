@@ -7,21 +7,33 @@ type TProps = {
 const { title, padded = true } = Astro.props as TProps
 ---
 
-<figure class="my-4 overflow-hidden rounded-xl border border-border bg-surface">
+<figure class="not-prose my-6 overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
   {
     title && (
-      <figcaption class="flex items-center gap-2 border-b border-border bg-surface-muted px-4 py-2 text-xs font-medium text-muted-foreground">
+      <figcaption class="flex items-center gap-2 border-b border-border bg-surface-muted px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
         <span class="inline-block size-1.5 rounded-full bg-primary" />
-        {title}
+        <span>{title}</span>
       </figcaption>
     )
   }
   <div
     class:list={[
-      'relative flex min-h-32 flex-wrap items-center justify-center gap-3 bg-background',
-      padded && 'p-8',
+      'relative flex min-h-56 items-center justify-center overflow-hidden',
+      padded && 'p-10 sm:p-12',
     ]}
   >
-    <slot />
+    <div
+      class="pointer-events-none absolute inset-0 [background-image:radial-gradient(color-mix(in_oklch,var(--border-strong)_70%,transparent)_1px,transparent_1.5px)] [background-size:24px_24px] [background-position:12px_12px]"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_100%)]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative z-10 flex w-full flex-wrap items-center justify-center gap-3">
+      <slot />
+    </div>
   </div>
 </figure>
