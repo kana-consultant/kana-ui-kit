@@ -1,0 +1,29 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import { SkeletonCardDemo, SkeletonListDemo } from '@/components/demos/skeleton-demo'
+
+const code = `<Skeleton className='h-3 w-32' />
+<Skeleton className='size-10 rounded-full' />`
+---
+
+<DocsLayout title="Skeleton" description="Animated placeholder shape for loading states.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Skeleton"
+    description="Size it however you need — use Tailwind classes for shape, rounding, width, height."
+  />
+
+  <h2>Card placeholder</h2>
+  <DemoFrame title="Loading card">
+    <SkeletonCardDemo client:visible />
+  </DemoFrame>
+  <Code code={code} lang="tsx" />
+
+  <h2>List placeholder</h2>
+  <DemoFrame title="Row skeletons">
+    <SkeletonListDemo client:visible />
+  </DemoFrame>
+</DocsLayout>

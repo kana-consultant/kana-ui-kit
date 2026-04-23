@@ -5,7 +5,7 @@ import DemoFrame from '@/components/ui/demo-frame.astro'
 import Code from '@/components/ui/code.astro'
 import PropTable from '@/components/ui/prop-table.astro'
 import type { TPropRow } from '@/components/ui/prop-table.astro'
-import { InputBasicDemo, InputSearchDemo, InputInvalidDemo } from '@/components/demos/input-demo'
+import { InputBasicDemo, InputSizesDemo, InputIconsDemo, InputInvalidDemo } from '@/components/demos/input-demo'
 
 const basicCode = `<Label htmlFor="email" required>Email</Label>
 <Input id="email" type="email" placeholder="you@company.com" leadingIcon={<Mail />} />`
@@ -33,9 +33,14 @@ const rows: TPropRow[] = [
   </DemoFrame>
   <Code code={basicCode} lang="tsx" />
 
-  <h2>Search</h2>
-  <DemoFrame title="Leading icon only">
-    <InputSearchDemo client:visible />
+  <h2>Sizes</h2>
+  <DemoFrame title="sm · md · lg">
+    <InputSizesDemo client:visible />
+  </DemoFrame>
+
+  <h2>With icons</h2>
+  <DemoFrame title="Leading icons">
+    <InputIconsDemo client:visible />
   </DemoFrame>
 
   <h2>Invalid</h2>

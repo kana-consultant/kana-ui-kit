@@ -3,40 +3,38 @@ import DocsLayout from '@/layouts/docs-layout.astro'
 import PageHeader from '@/components/ui/page-header.astro'
 
 const primitives = [
-  { name: 'Button', desc: '7 variants, 5 sizes, loading + icon slots', href: '/docs/components/button' },
-  { name: 'Input', desc: 'Leading / trailing icons, invalid state, sizes', href: '/docs/components/input' },
+  { name: 'Avatar', desc: 'Image + fallback, 5 sizes', href: '/docs/components/avatar' },
   { name: 'Badge', desc: '8 tones, optional dot, 3 sizes', href: '/docs/components/badge' },
-  { name: 'Label', desc: 'Required indicator, tied to inputs', href: '/docs/components' },
-  { name: 'Textarea', desc: 'Invalid state, resize-y by default', href: '/docs/components' },
-  { name: 'Checkbox', desc: 'Radix-backed, indeterminate supported', href: '/docs/components' },
-  { name: 'Switch', desc: 'Radix-backed toggle', href: '/docs/components' },
-  { name: 'Select', desc: 'Radix Select composition', href: '/docs/components' },
-  { name: 'Dialog', desc: 'Modal with overlay + header/footer helpers', href: '/docs/components' },
-  { name: 'DropdownMenu', desc: 'Items, checkbox items, radio items, submenus', href: '/docs/components' },
-  { name: 'Tabs', desc: 'Radix-backed tabs', href: '/docs/components' },
-  { name: 'Tooltip', desc: 'Provider + trigger + content', href: '/docs/components' },
-  { name: 'Card', desc: 'Header / Title / Description / Content / Footer', href: '/docs/components' },
-  { name: 'Avatar', desc: 'Image + fallback', href: '/docs/components' },
-  { name: 'AvatarGroup', desc: 'Auto-overflow stack', href: '/docs/components' },
-  { name: 'Progress', desc: '5 tones', href: '/docs/components' },
-  { name: 'Skeleton', desc: 'Animated placeholder', href: '/docs/components' },
-  { name: 'Separator', desc: 'Horizontal / vertical', href: '/docs/components' },
-  { name: 'Tooltip', desc: 'Provider + trigger + content', href: '/docs/components' },
-  { name: 'Kbd', desc: 'Keyboard shortcut pill', href: '/docs/components' },
+  { name: 'Button', desc: '7 variants, 5 sizes, loading + icon slots', href: '/docs/components/button' },
+  { name: 'Card', desc: 'Header / Title / Content / Footer parts', href: '/docs/components/card' },
+  { name: 'Checkbox', desc: 'Indeterminate, keyboard navigable', href: '/docs/components/checkbox' },
+  { name: 'Dialog', desc: 'Modal with overlay and header/footer', href: '/docs/components/dialog' },
+  { name: 'DropdownMenu', desc: 'Items, checkbox / radio, submenus', href: '/docs/components/dropdown-menu' },
+  { name: 'Input', desc: 'Icons, invalid state, size variants', href: '/docs/components/input' },
+  { name: 'Kbd', desc: 'Keyboard shortcut pill', href: '/docs/components/kbd' },
+  { name: 'Label', desc: 'Required indicator, tied to controls', href: '/docs/components/label' },
+  { name: 'Progress', desc: '5 tones, bordered bar', href: '/docs/components/progress' },
+  { name: 'Select', desc: 'Grouped options, labels, separators', href: '/docs/components/select' },
+  { name: 'Separator', desc: 'Horizontal or vertical divider', href: '/docs/components/separator' },
+  { name: 'Skeleton', desc: 'Animated loading placeholder', href: '/docs/components/skeleton' },
+  { name: 'Switch', desc: 'Instant-toggle setting', href: '/docs/components/switch' },
+  { name: 'Tabs', desc: 'Horizontal tabs with panels', href: '/docs/components/tabs' },
+  { name: 'Textarea', desc: 'Multiline input with invalid state', href: '/docs/components/textarea' },
+  { name: 'Tooltip', desc: 'Hover / focus tooltip', href: '/docs/components/tooltip' },
 ]
 ---
 
 <DocsLayout
   title="Components"
-  description="The primitive layer — 18 accessible, unstyled-first components you compose into anything."
+  description="The primitive layer — 18 accessible, Radix-powered components you compose into anything."
 >
   <PageHeader
     eyebrow="Primitives"
     title="Components"
-    description="The primitive layer — 18 accessible, Radix-powered components you compose into anything."
+    description="Radix-backed primitives. Accessible, keyboard navigable, ARIA-correct. Style with the shipped tokens or override freely."
   />
 
-  <div class="grid gap-3 sm:grid-cols-2">
+  <div class="not-prose grid gap-3 sm:grid-cols-2">
     {
       primitives.map((p) => (
         <a
@@ -45,7 +43,9 @@ const primitives = [
         >
           <div class="flex items-center justify-between">
             <h3 class="font-mono text-sm font-semibold text-foreground">{p.name}</h3>
-            <span class="text-xs text-muted-foreground group-hover:text-primary">→</span>
+            <span class="text-xs text-muted-foreground transition group-hover:text-primary group-hover:translate-x-0.5">
+              →
+            </span>
           </div>
           <p class="mt-1 text-sm text-muted-foreground">{p.desc}</p>
         </a>

@@ -1,0 +1,49 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import { CardBasicDemo, CardMinimalDemo } from '@/components/demos/card-demo'
+
+const basicCode = `<Card>
+  <CardHeader>
+    <CardTitle>Sprint velocity</CardTitle>
+    <CardDescription>Last 4 sprints averaged 38 points.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className='text-sm text-muted-foreground'>...</p>
+  </CardContent>
+  <CardFooter className='justify-end'>
+    <Button variant='ghost' size='sm'>Dismiss</Button>
+    <Button size='sm'>View report</Button>
+  </CardFooter>
+</Card>`
+---
+
+<DocsLayout title="Card" description="Composable container with Header / Title / Description / Content / Footer parts.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Card"
+    description="Composable container for grouping related content. Use the parts you need, skip the ones you don't."
+  />
+
+  <h2>With header and footer</h2>
+  <DemoFrame title="Full composition">
+    <CardBasicDemo client:visible />
+  </DemoFrame>
+  <Code code={basicCode} lang="tsx" />
+
+  <h2>Minimal</h2>
+  <DemoFrame title="No parts — just padding">
+    <CardMinimalDemo client:visible />
+  </DemoFrame>
+
+  <h2>Parts</h2>
+  <ul>
+    <li><code>Card</code> — the outer container</li>
+    <li><code>CardHeader</code> — padded top section, stacks children</li>
+    <li><code>CardTitle</code>, <code>CardDescription</code> — semantic header typography</li>
+    <li><code>CardContent</code> — padded body</li>
+    <li><code>CardFooter</code> — bordered-top footer, gapped flex row</li>
+  </ul>
+</DocsLayout>

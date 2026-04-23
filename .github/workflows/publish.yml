@@ -9,6 +9,7 @@ jobs:
   publish:
     name: Publish @kana-consultant/ui-kit
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref_name, 'v')
     permissions:
       contents: read
       id-token: write

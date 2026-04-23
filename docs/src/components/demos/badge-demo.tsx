@@ -15,6 +15,16 @@ export function BadgeTonesDemo() {
   )
 }
 
+export function BadgeSizesDemo() {
+  return (
+    <div className='flex items-center gap-2'>
+      <Badge tone='primary' size='sm'>Small</Badge>
+      <Badge tone='primary' size='md'>Medium</Badge>
+      <Badge tone='primary' size='lg'>Large</Badge>
+    </div>
+  )
+}
+
 export function BadgeDotDemo() {
   return (
     <div className='flex flex-wrap justify-center gap-2'>

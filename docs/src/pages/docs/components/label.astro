@@ -1,0 +1,44 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import PropTable from '@/components/ui/prop-table.astro'
+import type { TPropRow } from '@/components/ui/prop-table.astro'
+import { LabelBasicDemo, LabelRequiredDemo, LabelInlineDemo } from '@/components/demos/label-demo'
+
+const requiredCode = `<Label htmlFor='email' required>Email</Label>
+<Input id='email' type='email' />`
+
+const rows: TPropRow[] = [
+  { name: 'required', type: 'boolean', default: 'false', description: 'Appends a red asterisk after the children.' },
+  { name: 'htmlFor', type: 'string', description: 'Standard Radix Label — matches a control id.' },
+]
+---
+
+<DocsLayout title="Label" description="Accessible form label with optional required indicator.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Label"
+    description="Radix-backed label. Click-to-focus its linked control. Optional required indicator."
+  />
+
+  <h2>Basic</h2>
+  <DemoFrame title="Standard label">
+    <LabelBasicDemo client:visible />
+  </DemoFrame>
+
+  <h2>Required</h2>
+  <DemoFrame title='required prop appends "*"'>
+    <LabelRequiredDemo client:visible />
+  </DemoFrame>
+  <Code code={requiredCode} lang="tsx" />
+
+  <h2>Inline (with checkbox)</h2>
+  <DemoFrame title="Click-to-toggle">
+    <LabelInlineDemo client:visible />
+  </DemoFrame>
+
+  <h2>Props</h2>
+  <PropTable rows={rows} />
+</DocsLayout>

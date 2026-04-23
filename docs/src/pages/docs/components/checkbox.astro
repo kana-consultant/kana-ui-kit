@@ -1,0 +1,43 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import {
+  CheckboxDemo,
+  CheckboxIndeterminateDemo,
+  CheckboxDisabledDemo,
+} from '@/components/demos/checkbox-demo'
+
+const basicCode = `const [checked, setChecked] = useState<boolean | 'indeterminate'>(false)
+
+<Checkbox id='c1' checked={checked} onCheckedChange={setChecked} />
+<Label htmlFor='c1'>Email me about new releases</Label>`
+
+const indeterminateCode = `<Checkbox checked='indeterminate' />`
+---
+
+<DocsLayout title="Checkbox" description="Accessible checkbox with support for indeterminate state.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Checkbox"
+    description="Radix-backed checkbox with checked, unchecked, and indeterminate states."
+  />
+
+  <h2>Basic</h2>
+  <DemoFrame title="Controlled checkbox">
+    <CheckboxDemo client:visible />
+  </DemoFrame>
+  <Code code={basicCode} lang="tsx" />
+
+  <h2>Indeterminate</h2>
+  <DemoFrame title='Pass checked="indeterminate"'>
+    <CheckboxIndeterminateDemo client:visible />
+  </DemoFrame>
+  <Code code={indeterminateCode} lang="tsx" />
+
+  <h2>Disabled</h2>
+  <DemoFrame title="disabled={true}">
+    <CheckboxDisabledDemo client:visible />
+  </DemoFrame>
+</DocsLayout>

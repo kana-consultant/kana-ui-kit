@@ -1,0 +1,44 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import { SelectBasicDemo, SelectGroupedDemo } from '@/components/demos/select-demo'
+
+const code = `<Select defaultValue='medium'>
+  <SelectTrigger>
+    <SelectValue placeholder='Pick priority' />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value='low'>Low</SelectItem>
+    <SelectItem value='medium'>Medium</SelectItem>
+    <SelectItem value='high'>High</SelectItem>
+    <SelectItem value='urgent'>Urgent</SelectItem>
+  </SelectContent>
+</Select>`
+---
+
+<DocsLayout title="Select" description="Radix Select with trigger, content, groups, labels, and separators.">
+  <PageHeader
+    eyebrow="Primitives"
+    title="Select"
+    description="Accessible single-select with grouped options, labels, and separators."
+  />
+
+  <h2>Basic</h2>
+  <DemoFrame title="Priority picker">
+    <SelectBasicDemo client:visible />
+  </DemoFrame>
+  <Code code={code} lang="tsx" />
+
+  <h2>Grouped</h2>
+  <DemoFrame title="With SelectGroup + SelectLabel + SelectSeparator">
+    <SelectGroupedDemo client:visible />
+  </DemoFrame>
+
+  <h2>Parts</h2>
+  <ul>
+    <li><code>Select</code>, <code>SelectTrigger</code>, <code>SelectValue</code>, <code>SelectContent</code></li>
+    <li><code>SelectItem</code>, <code>SelectGroup</code>, <code>SelectLabel</code>, <code>SelectSeparator</code></li>
+  </ul>
+</DocsLayout>

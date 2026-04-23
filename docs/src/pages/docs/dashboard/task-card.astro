@@ -1,0 +1,41 @@
+---
+import DocsLayout from '@/layouts/docs-layout.astro'
+import PageHeader from '@/components/ui/page-header.astro'
+import DemoFrame from '@/components/ui/demo-frame.astro'
+import Code from '@/components/ui/code.astro'
+import { TaskCardSingleDemo, TaskListDemo } from '@/components/demos/task-card-demo'
+
+const code = `<TaskCard
+  task={{
+    id: 't1',
+    title: 'Ship the thing',
+    status: EStatus.InProgress,
+    priority: EPriority.High,
+    dueDate: 'Tomorrow',
+    assignees: [...],
+    tags: ['design'],
+    subtasks: { total: 5, done: 3 },
+    comments: 4,
+  }}
+  onToggle={(id, done) => {...}}
+/>`
+---
+
+<DocsLayout title="TaskCard" description="Row-level task with checkbox, priority, assignees, subtasks, comments.">
+  <PageHeader
+    eyebrow="Dashboard blocks"
+    title="TaskCard"
+    description="Record card built around a TTask shape. Use it in lists, Kanban columns, or anywhere tasks live."
+  />
+
+  <h2>Single card</h2>
+  <DemoFrame title="Click the checkbox">
+    <TaskCardSingleDemo client:visible />
+  </DemoFrame>
+  <Code code={code} lang="tsx" />
+
+  <h2>TaskList</h2>
+  <DemoFrame title="Stack of cards">
+    <TaskListDemo client:visible />
+  </DemoFrame>
+</DocsLayout>

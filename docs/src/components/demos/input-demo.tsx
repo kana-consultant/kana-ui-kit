@@ -1,23 +1,30 @@
 import { Input, Label } from '@kana-consultant/ui-kit'
-import { Mail, Search } from 'lucide-react'
+import { Mail, Search, Lock } from 'lucide-react'
 
 export function InputBasicDemo() {
   return (
-    <div className='w-full max-w-sm space-y-3'>
-      <div className='space-y-1.5'>
-        <Label htmlFor='demo-email' required>
-          Email
-        </Label>
-        <Input id='demo-email' type='email' placeholder='you@company.com' leadingIcon={<Mail />} />
-      </div>
+    <div className='w-full max-w-sm space-y-1.5'>
+      <Label htmlFor='demo-email' required>Email</Label>
+      <Input id='demo-email' type='email' placeholder='you@company.com' leadingIcon={<Mail />} />
     </div>
   )
 }
 
-export function InputSearchDemo() {
+export function InputSizesDemo() {
   return (
-    <div className='w-full max-w-sm'>
+    <div className='w-full max-w-sm space-y-3'>
+      <Input sizeVariant='sm' placeholder='Small input' />
+      <Input sizeVariant='md' placeholder='Medium input' />
+      <Input sizeVariant='lg' placeholder='Large input' />
+    </div>
+  )
+}
+
+export function InputIconsDemo() {
+  return (
+    <div className='w-full max-w-sm space-y-3'>
       <Input placeholder='Search tasks...' leadingIcon={<Search />} />
+      <Input type='password' placeholder='Password' leadingIcon={<Lock />} />
     </div>
   )
 }
