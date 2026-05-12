@@ -215,6 +215,7 @@ function Board() {
 
 | Component | Notes |
 | --- | --- |
+| `Alert` | 5 tones, icon tile + title + description + actions |
 | `Button` | 7 variants, 5 sizes, `loading` + icon slots |
 | `Input` | `leadingIcon`, `trailingIcon`, `invalid`, size variants |
 | `Label` | Required indicator |
@@ -228,6 +229,7 @@ function Board() {
 | `Card` | Header / Title / Description / Content / Footer |
 | `Badge` | 8 tones, `dot` prop |
 | `Avatar`, `AvatarGroup` | Radix avatar + auto-overflow group |
+| `Toast` | Radix Toast — provider, viewport, 5 tones, action + close |
 | `Progress`, `Skeleton`, `Separator`, `Kbd` | — |
 
 **Dashboard blocks**

@@ -18,6 +18,7 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 ## Primitives
 
 - [Overview](https://kana-ui-kit-docs.pages.dev/docs/components): Index of every primitive
+- [Alert](https://kana-ui-kit-docs.pages.dev/docs/components/alert): In-page banner with icon tile, title, description, optional actions — 5 tones
 - [Avatar](https://kana-ui-kit-docs.pages.dev/docs/components/avatar): Image + fallback, 5 sizes, AvatarGroup with auto-overflow
 - [Badge](https://kana-ui-kit-docs.pages.dev/docs/components/badge): 8 tones, 3 sizes, optional leading dot
 - [Button](https://kana-ui-kit-docs.pages.dev/docs/components/button): 7 variants, 5 sizes, loading state, icon slots, asChild composition
@@ -36,6 +37,7 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 - [Switch](https://kana-ui-kit-docs.pages.dev/docs/components/switch): Binary toggle for instant settings
 - [Tabs](https://kana-ui-kit-docs.pages.dev/docs/components/tabs): Horizontal tabs with content panels
 - [Textarea](https://kana-ui-kit-docs.pages.dev/docs/components/textarea): Multiline input with invalid state
+- [Toast](https://kana-ui-kit-docs.pages.dev/docs/components/toast): Radix-backed transient stack — provider + viewport + tone + action
 - [Tooltip](https://kana-ui-kit-docs.pages.dev/docs/components/tooltip): Hover / focus tooltip
 
 ## Dashboard blocks
