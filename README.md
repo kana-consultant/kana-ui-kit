@@ -227,6 +227,8 @@ function Board() {
 | `Tooltip` | Provider + Trigger + Content |
 | `Card` | Header / Title / Description / Content / Footer |
 | `Badge` | 8 tones, `dot` prop |
+| `DatePicker`, `DateRangePicker` | Calendar popover, hover-preview range, presets |
+| `Popover` | Radix popover with kit surface + radius |
 | `Avatar`, `AvatarGroup` | Radix avatar + auto-overflow group |
 | `Progress`, `Skeleton`, `Separator`, `Kbd` | — |
 
