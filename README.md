@@ -215,6 +215,7 @@ function Board() {
 
 | Component | Notes |
 | --- | --- |
+| `Alert` | 5 tones, icon tile + title + description + actions |
 | `Button` | 7 variants, 5 sizes, `loading` + icon slots |
 | `Input` | `leadingIcon`, `trailingIcon`, `invalid`, size variants |
 | `Label` | Required indicator |
@@ -230,6 +231,7 @@ function Board() {
 | `DatePicker`, `DateRangePicker` | Calendar popover, hover-preview range, presets |
 | `Popover` | Radix popover with kit surface + radius |
 | `Avatar`, `AvatarGroup` | Radix avatar + auto-overflow group |
+| `Toast` | Radix Toast — provider, viewport, 5 tones, action + close |
 | `Progress`, `Skeleton`, `Separator`, `Kbd` | — |
 
 **Dashboard blocks**

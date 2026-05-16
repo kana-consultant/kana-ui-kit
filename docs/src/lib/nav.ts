@@ -22,6 +22,7 @@ export const docsNav: TNavSection[] = [
     label: 'Primitives',
     items: [
       { label: 'Overview', href: '/docs/components' },
+      { label: 'Alert', href: '/docs/components/alert' },
       { label: 'Avatar', href: '/docs/components/avatar' },
       { label: 'Badge', href: '/docs/components/badge' },
       { label: 'Button', href: '/docs/components/button' },
@@ -42,6 +43,7 @@ export const docsNav: TNavSection[] = [
       { label: 'Switch', href: '/docs/components/switch' },
       { label: 'Tabs', href: '/docs/components/tabs' },
       { label: 'Textarea', href: '/docs/components/textarea' },
+      { label: 'Toast', href: '/docs/components/toast' },
       { label: 'Tooltip', href: '/docs/components/tooltip' },
     ],
   },
