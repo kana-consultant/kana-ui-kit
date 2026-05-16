@@ -19,7 +19,8 @@ const external = [
 ]
 
 export default defineConfig(({ mode }) => {
-  const isLib = mode !== 'playground'
+  const isStorybook = !!process.env.STORYBOOK
+  const isLib = mode !== 'playground' && !isStorybook
 
   return {
     plugins: [

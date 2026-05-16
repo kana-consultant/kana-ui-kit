@@ -24,11 +24,13 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 - [Card](https://kana-ui-kit-docs.pages.dev/docs/components/card): Header / Title / Description / Content / Footer parts
 - [Checkbox](https://kana-ui-kit-docs.pages.dev/docs/components/checkbox): Radix-backed with indeterminate state
 - [DataTable](https://kana-ui-kit-docs.pages.dev/docs/components/data-table): Data grid on TanStack Table — sorting, filtering, pagination, column visibility, row selection
+- [DatePicker](https://kana-ui-kit-docs.pages.dev/docs/components/date-picker): Single-date + date-range pickers with calendar popover, hover preview, and presets
 - [Dialog](https://kana-ui-kit-docs.pages.dev/docs/components/dialog): Modal with overlay, focus trap, header/footer helpers
 - [DropdownMenu](https://kana-ui-kit-docs.pages.dev/docs/components/dropdown-menu): Items, checkbox / radio variants, submenus
 - [Input](https://kana-ui-kit-docs.pages.dev/docs/components/input): Leading / trailing icon slots, invalid state, size variants
 - [Kbd](https://kana-ui-kit-docs.pages.dev/docs/components/kbd): Keyboard shortcut pill
 - [Label](https://kana-ui-kit-docs.pages.dev/docs/components/label): Form label with optional required indicator
+- [Popover](https://kana-ui-kit-docs.pages.dev/docs/components/popover): Radix popover with the kit shell — anchor, trigger, content, arrow, close
 - [Progress](https://kana-ui-kit-docs.pages.dev/docs/components/progress): Progress bar in 5 tones
 - [Select](https://kana-ui-kit-docs.pages.dev/docs/components/select): Radix Select with groups, labels, separators
 - [Separator](https://kana-ui-kit-docs.pages.dev/docs/components/separator): Horizontal / vertical divider
