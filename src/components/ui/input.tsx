@@ -36,6 +36,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(
       <input
         ref={ref}
         type={type}
+        aria-invalid={invalid || undefined}
         className={cn(
           'w-full bg-transparent px-3 text-foreground placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50',
           leadingIcon && 'pl-2',
