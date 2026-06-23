@@ -19,10 +19,11 @@ const toneMap: Record<TProgressTone, string> = {
 }
 
 export const Progress = forwardRef<HTMLDivElement, TProgressProps>(function Progress(
-  { className, tone = 'primary', value = 0, indicatorClassName, ...props },
+  { className, tone = 'primary', value, indicatorClassName, ...props },
   ref,
 ) {
-  const pct = Math.min(100, Math.max(0, value ?? 0))
+  const isIndeterminate = value === null || value === undefined
+  const pct = isIndeterminate ? 0 : Math.min(100, Math.max(0, value))
   return (
     <Root
       ref={ref}
