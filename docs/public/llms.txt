@@ -21,9 +21,12 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 - [Alert](https://kana-ui-kit-docs.pages.dev/docs/components/alert): In-page banner with icon tile, title, description, optional actions — 5 tones
 - [Avatar](https://kana-ui-kit-docs.pages.dev/docs/components/avatar): Image + fallback, 5 sizes, AvatarGroup with auto-overflow
 - [Badge](https://kana-ui-kit-docs.pages.dev/docs/components/badge): 8 tones, 3 sizes, optional leading dot
+- [Breadcrumb](https://kana-ui-kit-docs.pages.dev/docs/components/breadcrumb): Semantic nav with separator slot, ellipsis, current page
 - [Button](https://kana-ui-kit-docs.pages.dev/docs/components/button): 7 variants, 5 sizes, loading state, icon slots, asChild composition
 - [Card](https://kana-ui-kit-docs.pages.dev/docs/components/card): Header / Title / Description / Content / Footer parts
 - [Checkbox](https://kana-ui-kit-docs.pages.dev/docs/components/checkbox): Radix-backed with indeterminate state
+- [Combobox](https://kana-ui-kit-docs.pages.dev/docs/components/combobox): Search-select on Popover + Command, single + multi variants
+- [Command](https://kana-ui-kit-docs.pages.dev/docs/components/command): `cmdk`-backed palette with input, groups, items, shortcuts, dialog wrapper
 - [DataTable](https://kana-ui-kit-docs.pages.dev/docs/components/data-table): Data grid on TanStack Table — sorting, filtering, pagination, column visibility, row selection
 - [DatePicker](https://kana-ui-kit-docs.pages.dev/docs/components/date-picker): Single-date + date-range pickers with calendar popover, hover preview, and presets
 - [Dialog](https://kana-ui-kit-docs.pages.dev/docs/components/dialog): Modal with overlay, focus trap, header/footer helpers
@@ -31,10 +34,12 @@ The kit is distributed as an ESM npm package with TypeScript declarations and a 
 - [Input](https://kana-ui-kit-docs.pages.dev/docs/components/input): Leading / trailing icon slots, invalid state, size variants
 - [Kbd](https://kana-ui-kit-docs.pages.dev/docs/components/kbd): Keyboard shortcut pill
 - [Label](https://kana-ui-kit-docs.pages.dev/docs/components/label): Form label with optional required indicator
+- [Pagination](https://kana-ui-kit-docs.pages.dev/docs/components/pagination): Standalone prev/next/first/last + numbered pages with ellipsis
 - [Popover](https://kana-ui-kit-docs.pages.dev/docs/components/popover): Radix popover with the kit shell — anchor, trigger, content, arrow, close
 - [Progress](https://kana-ui-kit-docs.pages.dev/docs/components/progress): Progress bar in 5 tones
 - [Select](https://kana-ui-kit-docs.pages.dev/docs/components/select): Radix Select with groups, labels, separators
 - [Separator](https://kana-ui-kit-docs.pages.dev/docs/components/separator): Horizontal / vertical divider
+- [Sheet](https://kana-ui-kit-docs.pages.dev/docs/components/sheet): Side panel — Radix Dialog with left/right/top/bottom slide animation
 - [Skeleton](https://kana-ui-kit-docs.pages.dev/docs/components/skeleton): Animated loading placeholder
 - [Switch](https://kana-ui-kit-docs.pages.dev/docs/components/switch): Binary toggle for instant settings
 - [Tabs](https://kana-ui-kit-docs.pages.dev/docs/components/tabs): Horizontal tabs with content panels

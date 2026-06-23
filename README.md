@@ -232,6 +232,11 @@ function Board() {
 | `Popover` | Radix popover with kit surface + radius |
 | `Avatar`, `AvatarGroup` | Radix avatar + auto-overflow group |
 | `Toast` | Radix Toast — provider, viewport, 5 tones, action + close |
+| `Sheet` | Side panel (left/right/top/bottom) — Radix Dialog with slide animation |
+| `Breadcrumb` | Semantic nav with separator slot, ellipsis, current page |
+| `Pagination` | Standalone prev/next/first/last + numbered pages, ellipsis |
+| `Command` | `cmdk`-backed palette — `CommandDialog`, input, groups, shortcuts |
+| `Combobox`, `MultiCombobox` | Search-select built on `Popover` + `Command` |
 | `Progress`, `Skeleton`, `Separator`, `Kbd` | — |
 
 **Dashboard blocks**
