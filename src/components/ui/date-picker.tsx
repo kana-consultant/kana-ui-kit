@@ -104,6 +104,9 @@ function DayCell({
       onClick={() => onClick(date)}
       onMouseEnter={() => onHover?.(date)}
       onMouseLeave={() => onHover?.(undefined)}
+      aria-label={formatDate(date)}
+      aria-pressed={isPrimary || isInRange ? true : undefined}
+      aria-current={isToday ? 'date' : undefined}
       className={cn(
         'group/day relative inline-flex h-9 w-full items-center justify-center text-sm font-medium',
         'focus-visible:outline-none focus-visible:[&>span:last-child]:ring-2 focus-visible:[&>span:last-child]:ring-ring/40',
@@ -422,6 +425,11 @@ export function DateRangePicker({
         <button
           type='button'
           disabled={disabled}
+          aria-label={
+            hasValue
+              ? `Date range: ${fromLabel}${toLabel ? ` to ${toLabel}` : ''}`
+              : 'Select date range'
+          }
           className={cn(
             'group inline-flex w-full items-stretch gap-2 rounded-md text-left text-sm transition-colors',
             'disabled:cursor-not-allowed disabled:opacity-50',
