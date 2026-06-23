@@ -7,6 +7,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type Column,
   type ColumnDef,
   type ColumnFiltersState,
   type SortingState,
@@ -186,7 +187,7 @@ export const FullFeatured: Story = {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} column={header.column as Column<unknown, unknown>}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}

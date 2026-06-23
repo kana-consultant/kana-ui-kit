@@ -1,4 +1,5 @@
-import type { Column } from '@tanstack/react-table'
+import type { AriaAttributes } from 'react'
+import type { Column, SortDirection } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ChevronsUpDown, EyeOff } from 'lucide-react'
 import {
   DropdownMenu,
@@ -9,6 +10,12 @@ import {
 } from './dropdown-menu'
 import { Button } from './button'
 import { cn } from '@/lib/cn'
+
+export function getAriaSort(isSorted: false | SortDirection): AriaAttributes['aria-sort'] {
+  if (isSorted === 'asc') return 'ascending'
+  if (isSorted === 'desc') return 'descending'
+  return 'none'
+}
 
 export type TDataTableColumnHeaderProps<TData, TValue> = {
   column: Column<TData, TValue>

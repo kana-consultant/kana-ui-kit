@@ -1,6 +1,8 @@
 import { forwardRef } from 'react'
 import type { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react'
+import type { Column } from '@tanstack/react-table'
 import { cn } from '@/lib/cn'
+import { getAriaSort } from './data-table-column-header'
 
 export type TTableProps = HTMLAttributes<HTMLTableElement>
 
@@ -73,11 +75,18 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
   },
 )
 
-export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLTableCellElement>>(
-  function TableHead({ className, ...props }, ref) {
+export type TTableHeadProps = ThHTMLAttributes<HTMLTableCellElement> & {
+  column?: Column<unknown, unknown>
+}
+
+export const TableHead = forwardRef<HTMLTableCellElement, TTableHeadProps>(
+  function TableHead({ className, column, 'aria-sort': ariaSort, ...props }, ref) {
+    const resolvedAriaSort =
+      ariaSort ?? (column?.getCanSort() ? getAriaSort(column.getIsSorted()) : undefined)
     return (
       <th
         ref={ref}
+        aria-sort={resolvedAriaSort}
         className={cn(
           'h-11 px-3 text-left align-middle text-xs font-semibold uppercase tracking-wider text-muted-foreground [&:has([role=checkbox])]:pr-0',
           className,
